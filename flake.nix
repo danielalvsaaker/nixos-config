@@ -1,8 +1,14 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    wm = {
+      url = "git+ssh://git@github.com/danielalvsaaker/wm";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -16,9 +22,12 @@
 	        ./hosts/t14s
 	        home-manager.nixosModules.home-manager
 	        {
-	          home-manager.useGlobalPkgs = true;
-	          home-manager.useUserPackages = true;
-	          home-manager.users.daniel = import ./home/daniel/t14s.nix;
+	          home-manager = {
+		  	      useGlobalPkgs = true;
+	          	useUserPackages = true;
+	          	users.daniel = import ./home/daniel/t14s.nix;
+			        extraSpecialArgs = { inherit inputs; };
+		        };
 	        }
 	      ];
       };
