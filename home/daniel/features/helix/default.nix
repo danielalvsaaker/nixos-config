@@ -3,8 +3,8 @@
     enable = true;
     settings = {
       editor = {
-	      line-number = "relative";
+        line-number = "relative";
       };
-     };
+    };
   };
 }

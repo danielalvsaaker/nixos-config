@@ -2,7 +2,7 @@
   imports = [
     ./global
   ];
-  
+
   home.file.".xinitrc".text = "exec wm";
   programs.firefox.enable = true;
 

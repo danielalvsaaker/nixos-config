@@ -5,10 +5,11 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
-	security.polkit.enable = true;
-	hardware.opengl.enable = true;
+  security.polkit.enable = true;
+  hardware.opengl.enable = true;
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
@@ -16,20 +17,21 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/118bb1b2-0686-4b68-b11f-1e556efd507c";
+    {
+      device = "/dev/disk/by-uuid/118bb1b2-0686-4b68-b11f-1e556efd507c";
       fsType = "ext4";
     };
 
   boot.initrd.luks.devices."luks-ec06f5cd-41cc-4a33-bde9-04532a0820e2".device = "/dev/disk/by-uuid/ec06f5cd-41cc-4a33-bde9-04532a0820e2";
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/037B-0445";
+    {
+      device = "/dev/disk/by-uuid/037B-0445";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/920d9967-5339-4094-a65b-68726e8f83e7"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/920d9967-5339-4094-a65b-68726e8f83e7"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

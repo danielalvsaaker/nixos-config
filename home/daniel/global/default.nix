@@ -11,11 +11,11 @@
   nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
+
   home.packages = with pkgs; [
     ibm-plex
   ];
-  
+
   programs = {
     home-manager.enable = true;
     git.enable = true;
