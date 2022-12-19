@@ -2,9 +2,12 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      font.normal = {
-        family = "IBM Plex Mono";
-        style = "Regular";
+      font = {
+        size = 8.0;
+        normal = {
+          family = "IBM Plex Mono";
+          style = "Regular";
+        };
       };
     };
   };
