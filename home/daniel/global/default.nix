@@ -6,6 +6,7 @@
     ../features/nvim
     ../features/helix
     ../features/alacritty
+    ../features/starship
   ];
 
   nixpkgs.config.allowUnfree = true;
