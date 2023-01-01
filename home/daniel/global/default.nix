@@ -7,6 +7,7 @@
     ../features/helix
     ../features/alacritty
     ../features/starship
+    ../features/fish
   ];
 
   nixpkgs.config.allowUnfree = true;
