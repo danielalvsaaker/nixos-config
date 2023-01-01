@@ -13,7 +13,7 @@
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    ibm-plex
+    (nerdfonts.override { fonts = [ "IBMPlexMono" ]; })
   ];
 
   programs = {
