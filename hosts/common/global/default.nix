@@ -1,14 +1,13 @@
-{ lib, inputs, outputs, ... }:
+{ inputs, outputs, ... }:
 {
-  imports = {
-    inputs.home-manager.nixosModules.home-manager,
-    ];
+  imports = [
+    ./fish.nix
+  ];
 
-    fonts.fontconfig.enable = true;
-    fonts.fontconfig.defaultFonts.monospace = "IBM Plex Mono";
+  home-manager = {
+    useUserPackages = true;
+    extraSpecialArgs = { inherit inputs outputs; };
+  };
 
-    home-manager = {
-      useUserPackages = true;
-      extraSpecialArgs = { inherit inputs outputs; };
-    };
-  }
+  nixpkgs.config.allowUnfree = true;
+}

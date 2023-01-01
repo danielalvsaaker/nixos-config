@@ -4,11 +4,13 @@
     enableFishIntegration = true;
 
     settings = {
+      add_newline = false;
       right_format = "$time";
 
+      cmd_duration.disabled = true;
       line_break.disabled = true;
       package.disabled = true;
-      cmd_duration.disabled = true;
+      rust.disabled = true;
 
       time = {
         disabled = false;
