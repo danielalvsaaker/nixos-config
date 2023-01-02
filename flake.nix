@@ -25,7 +25,6 @@
             home-manager.nixosModules.home-manager
 
             {
-              nix.settings.experimental-features = [ "nix-command" "flakes" ];
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
