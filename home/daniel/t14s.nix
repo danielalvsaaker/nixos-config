@@ -2,6 +2,8 @@
 {
   imports = [
     ./global
+    ./features/alacritty
+    ./features/cli
   ];
 
   home.file.".xinitrc".text = "exec wm";

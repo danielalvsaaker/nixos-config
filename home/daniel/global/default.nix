@@ -1,25 +1,10 @@
-{ inputs, pkgs, config, ... }:
-
+{ pkgs, config, ... }:
 {
-  imports = [
-    ../features/cli/git.nix
-    ../features/nvim
-    ../features/helix
-    ../features/alacritty
-    ../features/starship
-    ../features/fish
-  ];
-
-  nixpkgs.config.allowUnfree = true;
-
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "IBMPlexMono" ]; })
   ];
 
-  programs = {
-    home-manager.enable = true;
-    git.enable = true;
-  };
+  programs.home-manager.enable = true;
 
   home = {
     username = "daniel";
