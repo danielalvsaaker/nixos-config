@@ -37,9 +37,6 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Oslo";
-
   # Select internationalisation properties.
   i18n.defaultLocale = "nb_NO.UTF-8";
 
