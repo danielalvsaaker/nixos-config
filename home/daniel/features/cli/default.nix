@@ -5,5 +5,6 @@
     ./helix.nix
     ./neovim.nix
     ./starship.nix
+    ./utils.nix
   ];
 }
