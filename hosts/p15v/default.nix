@@ -1,9 +1,5 @@
-{ inputs, ... }:
+{ nixos-wsl, ... }:
 
-let
-  inherit (inputs) nixos-wsl;
-
-in
 {
   imports = [
     ../common/global

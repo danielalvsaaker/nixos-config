@@ -28,7 +28,6 @@
           modules = [
             ./hosts/t14s
             home-manager.nixosModules.home-manager
-
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -54,7 +53,7 @@
               };
             }
           ];
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit (inputs) nixos-wsl; };
         };
       };
     };
