@@ -4,6 +4,10 @@
     userName = "Daniel Alvsåker";
     userEmail = "daniel.alvsaaker@protonmail.com";
 
+    aliases = {
+      ap = "add --patch";
+    };
+
     delta = {
       enable = true;
       options = {
