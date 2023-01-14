@@ -1,9 +1,5 @@
 { pkgs, config, ... }:
 {
-  home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "IBMPlexMono" ]; })
-  ];
-
   programs.home-manager.enable = true;
 
   home = {

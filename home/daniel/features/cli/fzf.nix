@@ -4,7 +4,7 @@
     enableFishIntegration = true;
     fileWidgetCommand = "fd --type f";
     defaultOptions = [
-      "--preview 'bat {}'"      
+      "--preview 'bat {}'"
     ];
   };
 }

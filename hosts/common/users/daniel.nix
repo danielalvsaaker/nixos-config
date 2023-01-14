@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 {
   users.users.daniel = {
     isNormalUser = true;
