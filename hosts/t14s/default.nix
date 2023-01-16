@@ -46,9 +46,9 @@
     displayManager.startx.enable = true;
     windowManager.i3.enable = true;
     enable = true;
-    layout = "no";
+    layout = "us";
     libinput.enable = true;
-    xkbVariant = "";
+    xkbVariant = "colemak_dh";
   };
 
 

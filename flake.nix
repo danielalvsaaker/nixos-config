@@ -14,11 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    wm = {
-      url = "git+ssh://git@github.com/danielalvsaaker/wm";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
   };
 
