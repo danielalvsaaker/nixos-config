@@ -51,8 +51,6 @@
     xkbVariant = "";
   };
 
-  # Configure console keymap
-  console.keyMap = "no";
 
   # Enable sound with pipewire.
   sound.enable = true;
