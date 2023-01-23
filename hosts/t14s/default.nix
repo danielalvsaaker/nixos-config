@@ -10,6 +10,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../common/global
+      ../common/optional/steam.nix
       ../common/users/daniel.nix
     ];
 
@@ -17,6 +18,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  services.fwupd.enable = true;
 
   # Setup keyfile
   boot.initrd.secrets = {

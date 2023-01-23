@@ -5,5 +5,5 @@
     ./global
     ./features/cli
     ./features/desktop
- ];
+  ];
 }

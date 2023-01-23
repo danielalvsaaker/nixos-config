@@ -9,7 +9,11 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
   security.polkit.enable = true;
-  hardware.opengl.enable = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
