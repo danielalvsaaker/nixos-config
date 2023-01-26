@@ -53,6 +53,11 @@
     libinput.enable = true;
   };
 
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+  };
+
 
   # Enable sound with pipewire.
   sound.enable = true;
