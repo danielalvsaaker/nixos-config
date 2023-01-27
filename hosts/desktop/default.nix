@@ -11,6 +11,7 @@
       ./hardware-configuration.nix
       ../common/global
       ../common/optional/steam.nix
+      ../common/optional/kernel.nix
       ../common/users/daniel.nix
     ];
 
