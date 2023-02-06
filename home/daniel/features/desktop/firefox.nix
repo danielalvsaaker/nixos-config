@@ -6,12 +6,13 @@ in
 {
   programs.firefox = {
     enable = true;
-    extensions = with addons; [
-      bitwarden
-      clearurls
-      decentraleyes
-      ublock-origin
-    ];
-    profiles.daniel = { };
+    profiles.daniel = {
+      extensions = with addons; [
+        bitwarden
+        clearurls
+        decentraleyes
+        ublock-origin
+      ];
+    };
   };
 }
