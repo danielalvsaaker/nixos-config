@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   wayland.windowManager.sway = rec {
     enable = true;
@@ -23,6 +23,8 @@
         in
         lib.mkOptionDefault {
           "${modifier}+l" = "exec ${pkgs.swaylock}/bin/swaylock -k";
+          "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
+          "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10-";
         };
 
       output = {
