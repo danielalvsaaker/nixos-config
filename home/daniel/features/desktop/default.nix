@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./discord.nix
@@ -6,4 +7,6 @@
     ./foot.nix
     ./sway.nix
   ];
+
+  home.packages = [ pkgs.jetbrains.rider ];
 }
