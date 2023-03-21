@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       main = {
-        font = "BlexMono Nerd Font Mono:size=8.5";
+        font = "BlexMono Nerd Font Mono:size=7";
         pad = "10x10";
       };
     };

@@ -25,6 +25,8 @@
           "${modifier}+l" = "exec ${pkgs.swaylock}/bin/swaylock -k";
           "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
           "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10-";
+          "${modifier}+XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl -d tpacpi::kbd_backlight set +1";
+          "${modifier}+XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl -d tpacpi::kbd_backlight set 1-";
         };
 
       output = {
