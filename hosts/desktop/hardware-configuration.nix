@@ -47,8 +47,6 @@
   # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
   hardware.opengl = {
     enable = true;
     driSupport = true;

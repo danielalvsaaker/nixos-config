@@ -11,6 +11,7 @@ in
         bitwarden
         clearurls
         decentraleyes
+        multi-account-containers
         ublock-origin
       ];
     };
