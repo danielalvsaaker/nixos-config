@@ -4,10 +4,8 @@
     enable = true;
     config = {
       modifier = "Mod4";
-      # Use kitty as default terminal
-      terminal = "foot";
+      terminal = "${pkgs.foot}/bin/foot";
       startup = [
-        # Launch Firefox on start
         { command = "firefox"; }
       ];
 
@@ -37,12 +35,12 @@
 
       floating.criteria =
         let
-          class = "^Steam$";
+          class = "^steam$";
         in
         [
           {
             inherit class;
-            title = "Friends List";
+            title = "^Friends List$";
           }
           {
             inherit class;
