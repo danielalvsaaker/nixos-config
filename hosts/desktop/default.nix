@@ -63,6 +63,12 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  hardware.bluetooth = {
+    enable = true;
+    settings.General = {
+      Enable = "Source,Sink,Media,Socket";
+    };
+  };
   security.rtkit.enable = true;
   security.pam.services.swaylock = { };
   services.pipewire = {
