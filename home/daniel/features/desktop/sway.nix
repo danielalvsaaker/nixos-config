@@ -1,13 +1,19 @@
 { config, lib, pkgs, ... }:
 {
+  imports = [ ./bar ];
+
   wayland.windowManager.sway = rec {
     enable = true;
+    systemdIntegration = true;
+
     config = {
       modifier = "Mod4";
       terminal = "${pkgs.foot}/bin/foot";
       startup = [
         { command = "firefox"; }
       ];
+
+      bars = [ ];
 
       left = "m";
       # Todo: resolve conflict
@@ -67,8 +73,8 @@
         };
       };
       gaps = {
-        outer = 25;
-        inner = 25;
+        outer = 15;
+        inner = 15;
       };
     };
   };
