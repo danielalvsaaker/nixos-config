@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   programs.waybar = {
     enable = true;
@@ -25,9 +26,8 @@
         ];
 
         modules-right = [
-          "memory"
-          "cpu"
           "temperature"
+          "bluetooth"
           "tray"
           "clock#date"
           "clock#time"
@@ -45,29 +45,22 @@
           tooltip = false;
         };
 
-        "cpu" = {
-          interval = 5;
-          format = "{usage}% ({load})";
-          states = {
-            warning = 70;
-            critical = 90;
-          };
-        };
-
-        "memory" = {
-          interval = 5;
-          format = "{}%";
-          states = {
-            warning = 70;
-            critical = 90;
-          };
-        };
-
         "temperature" = {
           critical-threshold = 80;
           interval = 5;
           format = "{temperatureC}°C";
           tooltip = true;
+        };
+
+        "bluetooth" = {
+          format = "";
+          format-on = "";
+          format-connected = " {device_alias}";
+          format-connected-battery = " {device_alias} {device_battery_percentage}%";
+          tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
+          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
         };
 
         "tray" = {

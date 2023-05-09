@@ -68,8 +68,9 @@
 
       input = {
         "*" = {
-          xkb_layout = "us";
-          xkb_variant = "colemak_dh";
+          xkb_layout = "us,us";
+          xkb_variant = "colemak_dh,intl";
+          xkb_options = "grp:win_space_toggle";
         };
       };
       gaps = {
@@ -77,6 +78,28 @@
         inner = 15;
       };
     };
+  };
+
+  services.swayidle = {
+    enable = true;
+    timeouts = [
+      {
+        timeout = 60 * 10;
+        command = "${pkgs.swaylock}/bin/swaylock -f";
+      }
+      {
+        timeout = 60 * 15;
+        command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
+        resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
+      }
+    ];
+
+    events = [
+      {
+        event = "before-sleep";
+        command = "${pkgs.swaylock}/bin/swaylock -f";
+      }
+    ];
   };
 }
 
