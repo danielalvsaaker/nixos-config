@@ -12,7 +12,7 @@
       ../common/global
       ../common/optional/steam.nix
       ../common/optional/kernel.nix
-      ../common/users/daniel.nix
+      ../../users/daniel
     ];
 
   # Bootloader.
@@ -29,6 +29,7 @@
   boot.initrd.luks.devices."luks-bf8166af-73cb-497e-a5c1-6f89957ddc3a".device = "/dev/disk/by-uuid/bf8166af-73cb-497e-a5c1-6f89957ddc3a";
   boot.initrd.luks.devices."luks-bf8166af-73cb-497e-a5c1-6f89957ddc3a".keyFile = "/crypto_keyfile.bin";
 
+  # systemd.network.enable = true;
   networking.hostName = "desktop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 

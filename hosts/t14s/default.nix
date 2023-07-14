@@ -10,7 +10,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../common/global
-      ../common/users/daniel.nix
+      ../../users/daniel
     ];
 
   # Bootloader.

@@ -18,7 +18,6 @@
 
         modules-left = [
           "sway/workspaces"
-          "mpris"
         ];
 
         modules-center = [
@@ -66,15 +65,6 @@
         "tray" = {
           icon-size = 21;
           spacing = 10;
-        };
-
-        "mpris" = {
-          format = "{status_icon} {artist} - {title} ({album})";
-          format-stopped = "";
-          status-icons = {
-            playing = "⏵";
-            paused = "⏸";
-          };
         };
       }
     ];

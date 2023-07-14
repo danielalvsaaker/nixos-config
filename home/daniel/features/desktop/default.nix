@@ -7,6 +7,4 @@
     ./foot.nix
     ./sway.nix
   ];
-
-  home.packages = [ pkgs.jetbrains.rider ];
 }

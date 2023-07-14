@@ -36,7 +36,7 @@
 
 /* The whole bar */
 #waybar {
-    background: #323232;
+    background-color: transparent;
     color: white;
     font-family: Cantarell, Noto Sans, sans-serif;
     font-size: 13px;
@@ -50,7 +50,6 @@
 #memory,
 #mode,
 #network,
-#pulseaudio,
 #temperature,
 #tray {
     padding-left: 10px;

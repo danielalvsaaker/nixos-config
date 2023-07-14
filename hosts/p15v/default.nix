@@ -3,7 +3,7 @@
 {
   imports = [
     ../common/global
-    ../common/users/daniel.nix
+    ../../users/daniel
     nixos-wsl.nixosModules.wsl
   ];
 

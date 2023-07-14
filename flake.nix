@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +29,7 @@
     { self
     , nixpkgs
     , home-manager
+    , sops-nix
     , nixos-hardware
     , ...
     }@inputs:
@@ -38,6 +44,7 @@
           ]) ++
           [
             ./hosts/t14s
+            sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -60,6 +67,7 @@
           ]) ++
           [
             ./hosts/desktop
+            sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -76,6 +84,7 @@
           system = "x86_64-linux";
           modules = [
             ./hosts/p15v
+            sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             {
               home-manager = {
