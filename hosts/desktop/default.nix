@@ -20,15 +20,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
-
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-bf8166af-73cb-497e-a5c1-6f89957ddc3a".device = "/dev/disk/by-uuid/bf8166af-73cb-497e-a5c1-6f89957ddc3a";
-  boot.initrd.luks.devices."luks-bf8166af-73cb-497e-a5c1-6f89957ddc3a".keyFile = "/crypto_keyfile.bin";
-
   # systemd.network.enable = true;
   networking.hostName = "desktop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -45,6 +36,10 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "nb_NO.UTF-8";
 
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+  };
 
   # Configure keymap in X11
   services.xserver = {
@@ -60,7 +55,6 @@
     wlr.enable = true;
   };
 
-
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -70,6 +64,7 @@
       Enable = "Source,Sink,Media,Socket";
     };
   };
+  security.polkit.enable = true;
   security.rtkit.enable = true;
   security.pam.services.swaylock = { };
   services.pipewire = {
