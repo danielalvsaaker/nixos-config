@@ -5,7 +5,9 @@
       main = {
         font = "BlexMono Nerd Font Mono:size=7";
         pad = "10x10";
+        dpi-aware = "yes";
       };
+
 
       cursor = {
         color = "282a36 f8f8f2";
