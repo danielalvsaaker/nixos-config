@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, lib, outputs, ... }:
 
 {
@@ -11,7 +7,10 @@
       ./hardware-configuration.nix
       ../common/global
       ../common/optional/bluetooth.nix
+      ../common/optional/steam.nix
+      ../common/optional/kernel.nix
       ../../users/daniel
+      ./networks/wlan.nix
     ];
 
   # Bootloader.
@@ -30,15 +29,15 @@
   boot.initrd.luks.devices."luks-43cff19d-a693-4065-b6e7-307f82bfca2c".device = "/dev/disk/by-uuid/43cff19d-a693-4065-b6e7-307f82bfca2c";
   boot.initrd.luks.devices."luks-43cff19d-a693-4065-b6e7-307f82bfca2c".keyFile = "/crypto_keyfile.bin";
 
-  networking.hostName = "t14s"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking = {
+    hostName = "t14s";
+    useDHCP = false;
+    wireless.iwd.enable = true;
+  };
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
+  systemd.network = {
+    enable = true;
+  };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "nb_NO.UTF-8";
