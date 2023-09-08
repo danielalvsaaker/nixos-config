@@ -12,6 +12,7 @@
       ../common/global
       ../common/optional/steam.nix
       ../common/optional/kernel.nix
+      ../common/optional/bluetooth.nix
       ../../users/daniel
     ];
 
@@ -58,12 +59,6 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  hardware.bluetooth = {
-    enable = true;
-    settings.General = {
-      Enable = "Source,Sink,Media,Socket";
-    };
-  };
   security.polkit.enable = true;
   security.rtkit.enable = true;
   security.pam.services.swaylock = { };

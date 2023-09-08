@@ -4,14 +4,15 @@
     ./fish.nix
   ];
 
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "IBMPlexMono" ]; })
-  ];
   fonts = {
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
     fontconfig.defaultFonts = {
       monospace = [ "BlexMono Nerd Font Mono" ];
     };
+
+    packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "IBMPlexMono" ]; })
+    ];
   };
 
   time.timeZone = "Europe/Oslo";

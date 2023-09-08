@@ -10,6 +10,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../common/global
+      ../common/optional/bluetooth.nix
       ../../users/daniel
     ];
 
@@ -53,11 +54,15 @@
     xkbVariant = "colemak_dh";
   };
 
+  services.tlp.settings = {
+    DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth";
+  };
 
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  security.pam.services.swaylock = { };
   services.pipewire = {
     enable = true;
     alsa.enable = true;

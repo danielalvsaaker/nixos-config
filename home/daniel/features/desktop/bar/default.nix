@@ -25,6 +25,7 @@
         ];
 
         modules-right = [
+          "battery"
           "temperature"
           "bluetooth"
           "tray"
@@ -51,15 +52,27 @@
           tooltip = true;
         };
 
+        "battery" = {
+          interval = 120;
+          states = {
+            warning = 20;
+            critical = 10;
+          };
+          format = "{capacity}%";
+        };
+
         "bluetooth" = {
           format = "";
           format-on = "";
+          format-disabled = "̸";
+          format-off = "̸";
           format-connected = " {device_alias}";
           format-connected-battery = " {device_alias} {device_battery_percentage}%";
           tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
           tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
           tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
           tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
+          on-click-right = "${pkgs.util-linux}/bin/rfkill toggle bluetooth";
         };
 
         "tray" = {
