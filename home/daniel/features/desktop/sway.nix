@@ -8,29 +8,21 @@
 
     config = {
       modifier = "Mod4";
-      terminal = "${pkgs.foot}/bin/foot";
-      startup = [
-        { command = "firefox"; }
-      ];
-
+      terminal = lib.getExe pkgs.foot;
       bars = [ ];
-
-      left = "m";
-      # Todo: resolve conflict
-      #right = "i";
-      #down = "n";
-      #up = "e";
 
       keybindings =
         let
           modifier = config.modifier;
+          swaylock = lib.getExe pkgs.swaylock;
+          brightnessctl = lib.getExe pkgs.brightnessctl;
         in
         lib.mkOptionDefault {
-          "${modifier}+l" = "exec ${pkgs.swaylock}/bin/swaylock -k";
-          "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +10";
-          "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 10-";
-          "${modifier}+XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl -d tpacpi::kbd_backlight set +1";
-          "${modifier}+XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl -d tpacpi::kbd_backlight set 1-";
+          "${modifier}+l" = "exec ${swaylock} -k";
+          "XF86MonBrightnessUp" = "exec ${brightnessctl} set +10";
+          "XF86MonBrightnessDown" = "exec ${brightnessctl} set 10-";
+          "${modifier}+XF86MonBrightnessUp" = "exec ${brightnessctl} -d tpacpi::kbd_backlight set +1";
+          "${modifier}+XF86MonBrightnessDown" = "exec ${brightnessctl} -d tpacpi::kbd_backlight set 1-";
         };
 
       output = {
