@@ -44,10 +44,7 @@
 
   # Configure keymap in X11
   services.xserver = {
-    desktopManager.xterm.enable = false;
-    displayManager.startx.enable = true;
-    windowManager.i3.enable = true;
-    enable = true;
+    enable = false;
     layout = "us";
     libinput.enable = true;
     xkbVariant = "colemak_dh";
@@ -56,6 +53,8 @@
   services.tlp.settings = {
     DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth";
   };
+
+  environment.systemPackages = [ pkgs.jetbrains.rider ];
 
   # Enable sound with pipewire.
   sound.enable = true;
