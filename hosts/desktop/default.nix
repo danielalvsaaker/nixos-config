@@ -16,20 +16,30 @@
       ../../users/daniel
     ];
 
+  services.fwupd.enable = true;
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  boot.kernelModules = [ "zenpower" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.zenpower ];
+  boot.blacklistedKernelModules = [ "k10temp" ];
+
+  boot.supportedFilesystems = [ "bcachefs" ];
+
   # systemd.network.enable = true;
   networking.hostName = "desktop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
+  networking.useDHCP = false;
+  systemd.network = {
+    enable = true;
+    networks."10-enp4s0" = {
+      matchConfig.Name = "enp4s0";
+      networkConfig.DHCP = "yes";
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Oslo";
