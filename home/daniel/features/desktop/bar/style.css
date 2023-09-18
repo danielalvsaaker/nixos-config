@@ -51,6 +51,7 @@
 #mode,
 #network,
 #temperature,
+#idle_inhibitor,
 #tray {
     padding-left: 10px;
     padding-right: 10px;

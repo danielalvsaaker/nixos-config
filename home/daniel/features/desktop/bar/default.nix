@@ -18,6 +18,7 @@
 
         modules-left = [
           "sway/workspaces"
+          "idle_inhibitor"
         ];
 
         modules-center = [
@@ -78,6 +79,14 @@
         "tray" = {
           icon-size = 21;
           spacing = 10;
+        };
+
+        "idle_inhibitor" = {
+          format = "{icon}";
+          format-icons = {
+            activated = "";
+            deactivated = "";
+          };
         };
       }
     ];
