@@ -18,76 +18,21 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs =
-    { self
-    , nixpkgs
-    , home-manager
-    , nixos-hardware
-    , ...
-    }@inputs:
-    {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+  outputs = { flake-parts, ... } @ inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
 
-      nixosConfigurations = {
-        t14s = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = (with nixos-hardware.nixosModules; [
-            lenovo-thinkpad-t14s-amd-gen1
-          ]) ++
-          [
-            ./hosts/t14s
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.daniel = import ./home/daniel/t14s.nix;
-                extraSpecialArgs = { inherit inputs; };
-              };
-            }
-          ];
-        };
-
-        desktop = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = (with nixos-hardware.nixosModules; [
-            common-cpu-amd
-            common-cpu-amd-pstate
-            common-gpu-amd
-            common-pc-ssd
-          ]) ++
-          [
-            ./hosts/desktop
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.daniel = import ./home/daniel/desktop.nix;
-                extraSpecialArgs = { inherit inputs; };
-              };
-            }
-          ];
-        };
-
-        p15v = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/p15v
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.daniel = import ./home/daniel/p15v.nix;
-                extraSpecialArgs = { inherit inputs; };
-              };
-            }
-          ];
-          specialArgs = { inherit (inputs) nixos-wsl; };
-        };
+      perSystem = { pkgs, ... }: {
+        formatter = pkgs.nixpkgs-fmt;
       };
+
+      imports = [
+        ./hosts
+        ./modules
+      ];
     };
 }

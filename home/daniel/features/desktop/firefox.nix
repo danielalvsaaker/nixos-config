@@ -1,13 +1,13 @@
-{ inputs, pkgs, ... }:
+{ inputs, firefox-addons, ... }:
 
 let
-  addons = inputs.firefox-addons.packages.${pkgs.system};
+  # addons = firefox-addons.packages.${pkgs.system};
 in
 {
   programs.firefox = {
     enable = true;
     profiles.daniel = {
-      extensions = with addons; [
+      extensions = with firefox-addons; [
         bitwarden
         clearurls
         decentraleyes
