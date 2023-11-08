@@ -2,15 +2,16 @@
 
 let
   configuration = { pkgs, ... }: {
-    imports =
-      [
-        # Include the results of the hardware scan.
-        ./hardware-configuration.nix
-        ../common/global
-        inputs.self.nixosModules.bluetooth
-        inputs.self.nixosModules.kernel
-        ./networks/wlan.nix
-      ];
+    imports = [
+      ./hardware-configuration.nix
+      inputs.self.nixosModules.bluetooth
+      inputs.self.nixosModules.kernel
+      inputs.self.nixosModules.default
+      ./networks/wlan.nix
+    ];
+
+    system.stateVersion = "22.11";
+    time.timeZone = "Europe/Oslo";
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
@@ -83,7 +84,16 @@ in
         inputs.self.nixosModules.user-daniel
         inputs.self.nixosModules.home-manager
         {
-          home-manager.users.daniel = ../../home/daniel/t14s.nix;
+          home-manager.users.daniel = {
+            imports = [
+              ../../home/daniel/t14s.nix
+              inputs.self.homeManagerModules.program-discord
+              inputs.self.homeManagerModules.program-foot
+              inputs.self.homeManagerModules.program-firefox
+              inputs.self.homeManagerModules.program-element
+              inputs.self.homeManagerModules.program-sway
+            ];
+          };
         }
       ];
     }

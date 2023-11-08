@@ -6,11 +6,13 @@ let
       imports =
         [
           ./hardware-configuration.nix
-          ../common/global
+          inputs.self.nixosModules.default
           inputs.self.nixosModules.steam
           inputs.self.nixosModules.bluetooth
           inputs.self.nixosModules.kernel
         ];
+
+      system.stateVersion = "22.11";
 
       services.fwupd.enable = true;
 
@@ -90,7 +92,16 @@ in
         inputs.self.nixosModules.user-daniel
         inputs.self.nixosModules.home-manager
         {
-          home-manager.users.daniel = ../../home/daniel/desktop.nix;
+          home-manager.users.daniel = {
+            imports = [
+              ../../home/daniel/desktop.nix
+              inputs.self.homeManagerModules.program-discord
+              inputs.self.homeManagerModules.program-foot
+              inputs.self.homeManagerModules.program-firefox
+              inputs.self.homeManagerModules.program-element
+              inputs.self.homeManagerModules.program-sway
+            ];
+          };
         }
       ];
     }

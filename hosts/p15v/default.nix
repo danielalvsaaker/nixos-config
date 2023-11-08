@@ -3,8 +3,11 @@
 let
   configuration = {
     imports = [
-      ../common/global
+      inputs.self.nixosModules.default
     ];
+
+    system.stateVersion = "22.11";
+    time.timeZone = "Europe/Oslo";
 
     wsl = {
       enable = true;
