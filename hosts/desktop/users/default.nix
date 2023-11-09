@@ -1,5 +1,5 @@
 {
   imports = [
-    ./features/cli
+    ./daniel.nix
   ];
 }

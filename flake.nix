@@ -31,6 +31,7 @@
       };
 
       imports = [
+        ./lib
         ./hosts
         ./modules
       ];

@@ -1,78 +1,84 @@
-{ withSystem, inputs, ... }:
+{ withSystem, inputs, config, ... }:
 
 let
-  configuration = { pkgs, config, ... }:
-    {
-      imports =
-        [
-          ./hardware-configuration.nix
-          inputs.self.nixosModules.default
-          inputs.self.nixosModules.steam
-          inputs.self.nixosModules.bluetooth
-          inputs.self.nixosModules.kernel
-        ];
+  configuration = { pkgs, ... }: {
+    imports = (with inputs.nixos-hardware.nixosModules; [
+      common-cpu-amd
+      common-cpu-amd-pstate
+      common-gpu-amd
+      common-pc-ssd
+    ]) ++
+    (with config.flake.nixosModules; [
+      default
+      steam
+      bluetooth
+      kernel
+    ]) ++
+    [
+      ./hardware-configuration.nix
+    ];
 
-      system.stateVersion = "22.11";
+    system.stateVersion = "22.11";
 
-      services.fwupd.enable = true;
+    services.fwupd.enable = true;
 
-      # Bootloader.
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
-      boot.loader.efi.efiSysMountPoint = "/boot/efi";
+    # Bootloader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-      boot.kernelModules = [ "zenpower" ];
-      boot.extraModulePackages = [ config.boot.kernelPackages.zenpower ];
-      boot.blacklistedKernelModules = [ "k10temp" ];
+    boot.kernelModules = [ "zenpower" ];
+    boot.extraModulePackages = [ config.boot.kernelPackages.zenpower ];
+    boot.blacklistedKernelModules = [ "k10temp" ];
 
-      boot.supportedFilesystems = [ "bcachefs" ];
+    boot.supportedFilesystems = [ "bcachefs" ];
 
-      # systemd.network.enable = true;
-      networking.hostName = "desktop"; # Define your hostname.
+    # systemd.network.enable = true;
+    networking.hostName = "desktop"; # Define your hostname.
 
-      networking.useDHCP = false;
-      systemd.network = {
-        enable = true;
-        networks."10-enp4s0" = {
-          matchConfig.Name = "enp4s0";
-          networkConfig.DHCP = "yes";
-        };
-      };
-
-      time.timeZone = "Europe/Oslo";
-
-      i18n.defaultLocale = "nb_NO.UTF-8";
-
-      hardware.opengl = {
-        enable = true;
-        driSupport = true;
-      };
-
-      services.xserver = {
-        enable = false;
-        displayManager.startx.enable = true;
-        layout = "us";
-        xkbVariant = "colemak_dh";
-        libinput.enable = true;
-      };
-
-      xdg.portal = {
-        enable = true;
-        wlr.enable = true;
-      };
-
-      sound.enable = true;
-      hardware.pulseaudio.enable = false;
-      security.polkit.enable = true;
-      security.rtkit.enable = true;
-      security.pam.services.swaylock = { };
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
+    networking.useDHCP = false;
+    systemd.network = {
+      enable = true;
+      networks."10-enp4s0" = {
+        matchConfig.Name = "enp4s0";
+        networkConfig.DHCP = "yes";
       };
     };
+
+    time.timeZone = "Europe/Oslo";
+
+    i18n.defaultLocale = "nb_NO.UTF-8";
+
+    hardware.opengl = {
+      enable = true;
+      driSupport = true;
+    };
+
+    services.xserver = {
+      enable = false;
+      displayManager.startx.enable = true;
+      layout = "us";
+      xkbVariant = "colemak_dh";
+      libinput.enable = true;
+    };
+
+    xdg.portal = {
+      enable = true;
+      wlr.enable = true;
+    };
+
+    sound.enable = true;
+    hardware.pulseaudio.enable = false;
+    security.polkit.enable = true;
+    security.rtkit.enable = true;
+    security.pam.services.swaylock = { };
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+  };
 in
 {
   flake.nixosConfigurations.desktop = withSystem "x86_64-linux" ({ system, ... }:
@@ -81,28 +87,9 @@ in
 
       specialArgs = { inherit inputs system; };
 
-      modules = (with inputs.nixos-hardware.nixosModules; [
-        common-cpu-amd
-        common-cpu-amd-pstate
-        common-gpu-amd
-        common-pc-ssd
-      ]) ++
-      [
+      modules = [
         configuration
-        inputs.self.nixosModules.user-daniel
-        inputs.self.nixosModules.home-manager
-        {
-          home-manager.users.daniel = {
-            imports = [
-              ../../home/daniel/desktop.nix
-              inputs.self.homeManagerModules.program-discord
-              inputs.self.homeManagerModules.program-foot
-              inputs.self.homeManagerModules.program-firefox
-              inputs.self.homeManagerModules.program-element
-              inputs.self.homeManagerModules.program-sway
-            ];
-          };
-        }
+        ./users
       ];
     }
   );

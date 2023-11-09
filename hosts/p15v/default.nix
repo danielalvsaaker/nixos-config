@@ -1,9 +1,26 @@
-{ withSystem, inputs, ... }:
+{ withSystem, inputs, config, ... }:
 
 let
+  user = {
+    imports = with config.flake.nixosModules; [
+      users-daniel
+      home-manager
+      {
+        home-manager.users.daniel = {
+          imports = with config.flake.homeManagerModules; [
+            profile-cli
+          ];
+        };
+      }
+    ];
+  };
+
   configuration = {
-    imports = [
-      inputs.self.nixosModules.default
+    imports = with config.flake.nixosModules; [
+      default
+    ] ++
+    [
+      inputs.nixos-wsl.nixosModules.wsl
     ];
 
     system.stateVersion = "22.11";
@@ -26,12 +43,7 @@ in
 
       modules = [
         configuration
-        inputs.nixos-wsl.nixosModules.wsl
-        inputs.self.nixosModules.user-daniel
-        inputs.self.nixosModules.home-manager
-        {
-          home-manager.users.daniel = import ../../home/daniel/p15v.nix;
-        }
+        user
       ];
     }
   );

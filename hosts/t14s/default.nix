@@ -1,12 +1,17 @@
-{ withSystem, inputs, ... }:
+{ withSystem, inputs, config, ... }:
 
 let
   configuration = { pkgs, ... }: {
-    imports = [
+    imports = (with inputs.nixos-hardware.nixosModules; [
+      lenovo-thinkpad-t14s-amd-gen1
+    ]) ++
+    (with config.flake.nixosModules; [
+      default
+      bluetooth
+      kernel
+    ]) ++
+    [
       ./hardware-configuration.nix
-      inputs.self.nixosModules.bluetooth
-      inputs.self.nixosModules.kernel
-      inputs.self.nixosModules.default
       ./networks/wlan.nix
     ];
 
@@ -54,8 +59,6 @@ let
       DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth";
     };
 
-    environment.systemPackages = [ pkgs.jetbrains.rider ];
-
     # Enable sound with pipewire.
     sound.enable = true;
     hardware.pulseaudio.enable = false;
@@ -76,25 +79,9 @@ in
 
       specialArgs = { inherit inputs system; };
 
-      modules = (with inputs.nixos-hardware.nixosModules; [
-        lenovo-thinkpad-t14s-amd-gen1
-      ]) ++
-      [
+      modules = [
         configuration
-        inputs.self.nixosModules.user-daniel
-        inputs.self.nixosModules.home-manager
-        {
-          home-manager.users.daniel = {
-            imports = [
-              ../../home/daniel/t14s.nix
-              inputs.self.homeManagerModules.program-discord
-              inputs.self.homeManagerModules.program-foot
-              inputs.self.homeManagerModules.program-firefox
-              inputs.self.homeManagerModules.program-element
-              inputs.self.homeManagerModules.program-sway
-            ];
-          };
-        }
+        ./users
       ];
     }
   );
