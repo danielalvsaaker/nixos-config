@@ -10,6 +10,11 @@ let
           imports = with config.flake.homeManagerModules; [
             profile-cli
           ];
+
+          programs.git = {
+            userName = "Danel Alvsåker";
+            userEmail = "30574112+danielalvsaaker@users.noreply.github.com";
+          };
         };
       }
     ];

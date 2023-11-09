@@ -13,6 +13,11 @@
         home.packages = [
           pkgs.jetbrains.rider
         ];
+
+        programs.git = {
+          userName = "Danel Alvsåker";
+          userEmail = "30574112+danielalvsaaker@users.noreply.github.com";
+        };
       };
     }
   ];
