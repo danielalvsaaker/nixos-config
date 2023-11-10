@@ -1,8 +1,7 @@
+{ pkgs, lib, ... }:
 {
   programs.git = {
     enable = true;
-    userName = "Daniel Alvsåker";
-    userEmail = "daniel.alvsaaker@protonmail.com";
 
     aliases = {
       ap = "add --patch";
@@ -19,7 +18,7 @@
 
     extraConfig = {
       pull.rebase = true;
-      core.editor = "hx";
+      core.editor = lib.getExe pkgs.helix;
     };
   };
 }
