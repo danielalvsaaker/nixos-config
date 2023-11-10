@@ -1,14 +1,14 @@
-{ withSystem, inputs, config, ... }:
+{ withSystem, inputs, ... }:
 
 let
-  configuration = { pkgs, ... }: {
+  configuration = { pkgs, inputs, config, ... }: {
     imports = (with inputs.nixos-hardware.nixosModules; [
       common-cpu-amd
       common-cpu-amd-pstate
       common-gpu-amd
       common-pc-ssd
     ]) ++
-    (with config.flake.nixosModules; [
+    (with inputs.self.nixosModules; [
       default
       steam
       bluetooth

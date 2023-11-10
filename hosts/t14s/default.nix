@@ -1,11 +1,11 @@
-{ withSystem, inputs, config, ... }:
+{ withSystem, inputs, ... }:
 
 let
-  configuration = { pkgs, ... }: {
+  configuration = { pkgs, inputs, ... }: {
     imports = (with inputs.nixos-hardware.nixosModules; [
       lenovo-thinkpad-t14s-amd-gen1
     ]) ++
-    (with config.flake.nixosModules; [
+    (with inputs.self.nixosModules; [
       default
       bluetooth
       kernel

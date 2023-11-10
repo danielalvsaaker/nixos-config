@@ -1,13 +1,13 @@
-{ withSystem, inputs, config, ... }:
+{ withSystem, inputs, ... }:
 
 let
   user = {
-    imports = with config.flake.nixosModules; [
+    imports = with inputs.self.nixosModules; [
       users-daniel
       home-manager
       {
         home-manager.users.daniel = {
-          imports = with config.flake.homeManagerModules; [
+          imports = with inputs.self.homeManagerModules; [
             profiles-cli
           ];
 
@@ -21,7 +21,7 @@ let
   };
 
   configuration = {
-    imports = with config.flake.nixosModules; [
+    imports = with inputs.self.nixosModules; [
       default
     ] ++
     [
