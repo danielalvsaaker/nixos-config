@@ -1,3 +1,4 @@
+{ pkgs, lib, ... }:
 {
   programs.fzf = {
     enable = true;
@@ -7,4 +8,9 @@
       "--preview 'bat {}'"
     ];
   };
+
+  home.packages = [
+    pkgs.bat
+    pkgs.fd
+  ];
 }

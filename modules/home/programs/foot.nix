@@ -1,4 +1,3 @@
-{ inputs, ... }:
 {
   programs.foot = {
     enable = true;
