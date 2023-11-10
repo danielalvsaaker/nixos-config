@@ -1,4 +1,4 @@
-{ inputs, firefox-addons, ... }:
+{ firefox-addons, ... }:
 {
   programs.firefox = {
     enable = true;

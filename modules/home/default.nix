@@ -5,7 +5,7 @@ let
 in
 {
   flake.homeManagerModules = modules // {
-    profile-desktop = {
+    profiles-desktop = {
       imports = with config.flake.homeManagerModules; [
         programs-discord
         programs-foot
@@ -20,7 +20,7 @@ in
       };
     };
 
-    profile-cli = {
+    profiles-cli = {
       imports = with config.flake.homeManagerModules; [
         programs-helix
         programs-git

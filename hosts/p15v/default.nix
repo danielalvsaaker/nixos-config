@@ -8,7 +8,7 @@ let
       {
         home-manager.users.daniel = {
           imports = with config.flake.homeManagerModules; [
-            profile-cli
+            profiles-cli
           ];
 
           programs.git = {

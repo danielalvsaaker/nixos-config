@@ -6,8 +6,8 @@
     {
       home-manager.users.daniel = { pkgs, ... }: {
         imports = with inputs.self.homeManagerModules; [
-          profile-desktop
-          profile-cli
+          profiles-desktop
+          profiles-cli
         ];
 
         home.packages = [
