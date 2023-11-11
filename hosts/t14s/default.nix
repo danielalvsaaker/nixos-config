@@ -7,6 +7,7 @@ let
     ]) ++
     (with inputs.self.nixosModules; [
       default
+      sway
       bluetooth
       kernel
     ]) ++

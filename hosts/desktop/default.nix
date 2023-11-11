@@ -1,7 +1,7 @@
 { withSystem, inputs, ... }:
 
 let
-  configuration = { pkgs, inputs, config, ... }: {
+  configuration = { pkgs, inputs, config, lib, ... }: {
     imports = (with inputs.nixos-hardware.nixosModules; [
       common-cpu-amd
       common-cpu-amd-pstate
@@ -11,6 +11,7 @@ let
     (with inputs.self.nixosModules; [
       default
       steam
+      sway
       bluetooth
       kernel
     ]) ++
@@ -18,14 +19,31 @@ let
       ./hardware-configuration.nix
     ];
 
+    specialisation.gnome.configuration = {
+      imports = with inputs.self.nixosModules; [
+        gnome
+      ];
+
+      services.xserver = {
+        xkb.layout = "no";
+        xkb.variant = "";
+      };
+    };
+
     system.stateVersion = "22.11";
 
     services.fwupd.enable = true;
 
     # Bootloader.
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.efi.efiSysMountPoint = "/boot/efi";
+    boot.loader = {
+      systemd-boot.enable = true;
+      timeout = 10;
+
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+    };
 
     boot.kernelModules = [ "zenpower" ];
     boot.extraModulePackages = [ config.boot.kernelPackages.zenpower ];
@@ -55,16 +73,14 @@ let
     };
 
     services.xserver = {
-      enable = false;
-      displayManager.startx.enable = true;
-      layout = "us";
-      xkbVariant = "colemak_dh";
+      xkb.layout = lib.mkDefault "us";
+      xkb.variant = lib.mkDefault "colemak_dh";
       libinput.enable = true;
     };
 
     xdg.portal = {
       enable = true;
-      wlr.enable = true;
+      xdgOpenUsePortal = true;
     };
 
     sound.enable = true;
