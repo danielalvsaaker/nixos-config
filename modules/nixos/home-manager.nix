@@ -1,4 +1,4 @@
-{ inputs, system, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -8,7 +8,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {
-      firefox-addons = inputs.firefox-addons.packages.${system};
+      firefox-addons = inputs.firefox-addons.packages.${pkgs.hostPlatform.system};
     };
 
     sharedModules = [

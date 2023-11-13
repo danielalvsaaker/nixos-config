@@ -44,7 +44,7 @@ in
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
 
-      specialArgs = { inherit inputs system; };
+      specialArgs = { inherit inputs; };
 
       modules = [
         configuration
