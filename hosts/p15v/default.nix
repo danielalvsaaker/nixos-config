@@ -12,7 +12,7 @@ let
           ];
 
           programs.git = {
-            userName = "Danel Alvsåker";
+            userName = "danielalvsaaker";
             userEmail = "30574112+danielalvsaaker@users.noreply.github.com";
           };
         };
