@@ -8,6 +8,7 @@
         imports = with inputs.self.homeManagerModules; [
           profiles-desktop
           profiles-cli
+          programs-obs
         ];
 
         home.packages = [
