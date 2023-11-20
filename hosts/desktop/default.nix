@@ -13,7 +13,7 @@ let
       steam
       sway
       bluetooth
-      kernel
+      # kernel
     ]) ++
     [
       ./hardware-configuration.nix
@@ -45,6 +45,7 @@ let
       };
     };
 
+    boot.kernelPackages = pkgs.linuxPackages_testing;
     boot.kernelModules = [ "zenpower" ];
     boot.extraModulePackages = [ config.boot.kernelPackages.zenpower ];
     boot.blacklistedKernelModules = [ "k10temp" ];

@@ -9,6 +9,9 @@
           profiles-desktop
           profiles-cli
           programs-obs
+          programs-blender
+          programs-godot
+          programs-krita
         ];
 
         home.packages = [
