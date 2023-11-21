@@ -16,13 +16,20 @@
           modifier = config.modifier;
           swaylock = lib.getExe pkgs.swaylock;
           brightnessctl = lib.getExe pkgs.brightnessctl;
+          wpctl = lib.getExe' pkgs.wireplumber "wpctl";
         in
         lib.mkOptionDefault {
           "${modifier}+l" = "exec ${swaylock} -k";
+
           "XF86MonBrightnessUp" = "exec ${brightnessctl} set +10";
           "XF86MonBrightnessDown" = "exec ${brightnessctl} set 10-";
           "${modifier}+XF86MonBrightnessUp" = "exec ${brightnessctl} -d tpacpi::kbd_backlight set +1";
           "${modifier}+XF86MonBrightnessDown" = "exec ${brightnessctl} -d tpacpi::kbd_backlight set 1-";
+
+          "XF86AudioMute" = "exec ${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          "XF86AudioRaiseVolume" = "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1";
+          "XF86AudioLowerVolume" = "exec ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+
           "${modifier}+s" = "exec ${lib.getExe pkgs.grim} -g \"$(${lib.getExe pkgs.slurp})\" $(${pkgs.xdg-user-dirs}/bin/xdg-user-dir PICTURES)/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')";
         };
 
