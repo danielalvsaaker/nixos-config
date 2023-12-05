@@ -33,6 +33,7 @@
       imports = [
         ./lib
         ./hosts
+        ./home
         ./modules
       ];
     };
