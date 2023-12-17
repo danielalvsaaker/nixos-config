@@ -12,6 +12,7 @@ in
         programs-firefox
         programs-element
         programs-sway
+        services-syncthing
       ];
 
       services = {
