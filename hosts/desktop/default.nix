@@ -45,7 +45,6 @@ let
       };
     };
 
-    boot.kernelPackages = pkgs.linuxPackages_testing;
     boot.kernelModules = [ "zenpower" ];
     boot.extraModulePackages = [ config.boot.kernelPackages.zenpower ];
     boot.blacklistedKernelModules = [ "k10temp" ];
