@@ -40,7 +40,7 @@ let
   };
 in
 {
-  flake.nixosConfigurations.p15v = withSystem "x86_64-linux" ({ system, ... }:
+  flake.nixosConfigurations.wsl= withSystem "x86_64-linux" ({ system, ... }:
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
 
