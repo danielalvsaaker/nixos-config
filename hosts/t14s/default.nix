@@ -9,7 +9,7 @@ let
       default
       sway
       bluetooth
-      kernel
+      lanzaboote
     ]) ++
     [
       ./hardware-configuration.nix
@@ -22,18 +22,9 @@ let
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.loader.efi.efiSysMountPoint = "/boot/efi";
+    boot.loader.efi.efiSysMountPoint = "/boot";
 
     services.fwupd.enable = true;
-
-    # Setup keyfile
-    boot.initrd.secrets = {
-      "/crypto_keyfile.bin" = null;
-    };
-
-    # Enable swap on luks
-    boot.initrd.luks.devices."luks-43cff19d-a693-4065-b6e7-307f82bfca2c".device = "/dev/disk/by-uuid/43cff19d-a693-4065-b6e7-307f82bfca2c";
-    boot.initrd.luks.devices."luks-43cff19d-a693-4065-b6e7-307f82bfca2c".keyFile = "/crypto_keyfile.bin";
 
     networking = {
       hostName = "t14s";
@@ -51,9 +42,11 @@ let
     # Configure keymap in X11
     services.xserver = {
       enable = false;
-      layout = "us";
       libinput.enable = true;
-      xkbVariant = "colemak_dh";
+      xkb = {
+        layout = "us";
+        variant = "colemak_dh";
+      };
     };
 
     services.tlp.settings = {
@@ -65,6 +58,12 @@ let
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     security.pam.services.swaylock = { };
+    security.polkit.enable = true;
+    hardware.opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
     services.pipewire = {
       enable = true;
       alsa.enable = true;
