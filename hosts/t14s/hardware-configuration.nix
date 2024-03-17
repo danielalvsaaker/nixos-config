@@ -16,7 +16,8 @@
 
   fileSystems."/" =
     {
-      device = "UUID=b7f210db-0e06-4fcb-a493-a79d45ffd25d";
+      # device = "UUID=b7f210db-0e06-4fcb-a493-a79d45ffd25d";
+      device = "/dev/mapper/pool-root";
       fsType = "bcachefs";
     };
 

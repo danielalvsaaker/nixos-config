@@ -23,6 +23,7 @@ let
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot";
+    boot.initrd.systemd.enable = true;
 
     services.fwupd.enable = true;
 
