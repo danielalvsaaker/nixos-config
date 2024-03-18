@@ -18,6 +18,7 @@
 
     extraConfig = {
       pull.rebase = true;
+      push.autoSetupRemote = true;
       core.editor = lib.getExe pkgs.helix;
     };
   };
