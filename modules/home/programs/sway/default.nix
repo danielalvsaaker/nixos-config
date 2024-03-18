@@ -1,9 +1,9 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, osConfig, ... }:
 {
   imports = [ ./bar ];
 
   wayland.windowManager.sway = rec {
-    enable = true;
+    enable = osConfig.programs.sway.enable;
     systemd.enable = true;
 
     config = {
@@ -14,12 +14,11 @@
       keybindings =
         let
           modifier = config.modifier;
-          swaylock = lib.getExe pkgs.swaylock;
           brightnessctl = lib.getExe pkgs.brightnessctl;
           wpctl = lib.getExe' pkgs.wireplumber "wpctl";
         in
         lib.mkOptionDefault {
-          "${modifier}+l" = "exec ${swaylock} -k";
+          "${modifier}+l" = "exec ${lib.getExe' pkgs.systemd "loginctl"} lock-session";
 
           "XF86MonBrightnessUp" = "exec ${brightnessctl} set +10";
           "XF86MonBrightnessDown" = "exec ${brightnessctl} set 10-";
@@ -80,26 +79,37 @@
     };
   };
 
-  services.swayidle = {
-    enable = true;
-    timeouts = [
-      {
-        timeout = 60 * 10;
-        command = "${pkgs.swaylock}/bin/swaylock -f";
-      }
-      {
-        timeout = 60 * 15;
-        command = "${pkgs.sway}/bin/swaymsg 'output * dpms off'";
-        resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * dpms on'";
-      }
-    ];
+  services.swayidle =
+    let
+      swaylock = "${lib.getExe pkgs.swaylock} -f";
+      swaymsg = lib.getExe' pkgs.sway "swaymsg";
+    in
+    {
+      enable = true;
+      systemdTarget = "sway-session.target";
 
-    events = [
-      {
-        event = "before-sleep";
-        command = "${pkgs.swaylock}/bin/swaylock -f";
-      }
-    ];
-  };
+      timeouts = [
+        {
+          timeout = 60 * 5;
+          command = swaylock;
+        }
+        {
+          timeout = 60 * 6;
+          command = "${swaymsg} 'output * dpms off'";
+          resumeCommand = "${swaymsg} 'output * dpms on'";
+        }
+      ];
+
+      events = [
+        {
+          event = "before-sleep";
+          command = swaylock;
+        }
+        {
+          event = "lock";
+          command = swaylock;
+        }
+      ];
+    };
 }
 

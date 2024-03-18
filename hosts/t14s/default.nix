@@ -58,7 +58,6 @@ let
     sound.enable = true;
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
-    security.pam.services.swaylock = { };
     security.polkit.enable = true;
     hardware.opengl = {
       enable = true;
