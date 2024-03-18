@@ -73,8 +73,8 @@
         };
       };
       gaps = {
-        outer = 15;
-        inner = 15;
+        outer = 10;
+        inner = 10;
       };
     };
   };
