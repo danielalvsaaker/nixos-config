@@ -8,7 +8,6 @@
         dpi-aware = "yes";
       };
 
-
       cursor = {
         color = "282a36 f8f8f2";
       };
