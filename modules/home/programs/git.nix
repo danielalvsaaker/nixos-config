@@ -5,6 +5,7 @@
 
     aliases = {
       ap = "add --patch";
+      an = "commit --amend --no-edit";
     };
 
     delta = {
