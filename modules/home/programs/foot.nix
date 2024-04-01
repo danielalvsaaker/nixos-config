@@ -3,9 +3,8 @@
     enable = true;
     settings = {
       main = {
-        font = "BlexMono Nerd Font Mono:size=7";
+        font = "BlexMono Nerd Font Mono:size=10";
         pad = "10x10";
-        dpi-aware = "yes";
       };
 
       cursor = {
