@@ -10,13 +10,16 @@ let
       sway
       bluetooth
       lanzaboote
+      plymouth
+      gnome
+      fprint
     ]) ++
     [
       ./hardware-configuration.nix
       ./networks/wlan.nix
     ];
 
-    system.stateVersion = "22.11";
+    system.stateVersion = "24.05";
     time.timeZone = "Europe/Oslo";
 
     # Bootloader.
@@ -24,6 +27,7 @@ let
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot";
     boot.initrd.systemd.enable = true;
+    services.xserver.displayManager.gdm.enable = true;
 
     services.fwupd.enable = true;
 
@@ -39,16 +43,6 @@ let
 
     # Select internationalisation properties.
     i18n.defaultLocale = "nb_NO.UTF-8";
-
-    # Configure keymap in X11
-    services.xserver = {
-      enable = false;
-      libinput.enable = true;
-      xkb = {
-        layout = "us";
-        variant = "colemak_dh";
-      };
-    };
 
     services.tlp.settings = {
       DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth";
