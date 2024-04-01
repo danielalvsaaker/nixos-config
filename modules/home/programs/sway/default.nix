@@ -4,6 +4,7 @@
 
   wayland.windowManager.sway = rec {
     enable = osConfig.programs.sway.enable;
+    package = osConfig.programs.sway.package;
     systemd.enable = true;
 
     config = {
@@ -33,6 +34,9 @@
         };
 
       output = {
+        "*" = {
+          bg = "${pkgs.nixos-artwork.wallpapers.dracula.gnomeFilePath} fill";
+        };
         HDMI-A-1 = {
           mode = "2560x1440@74.968Hz";
         };
@@ -77,6 +81,11 @@
         inner = 10;
       };
     };
+  };
+
+  programs.swaylock = {
+    enable = true;
+    settings.image = pkgs.nixos-artwork.wallpapers.dracula.gnomeFilePath;
   };
 
   services.swayidle =

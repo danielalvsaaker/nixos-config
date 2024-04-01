@@ -1,8 +1,5 @@
 {
-  programs.sway = {
-    enable = true;
-    package = null;
-  };
+  programs.sway.enable = true;
 
   xdg.portal.wlr.enable = true;
   security.pam.services.swaylock = { };
