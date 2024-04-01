@@ -46,7 +46,14 @@ let
 
     services.tlp.settings = {
       DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth";
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      PLATFORM_PROFILE_ON_AC = "performance";
+      PLATFORM_PROFILE_ON_BAT = "low-power";
     };
+    boot.extraModprobeConfig = ''
+      options iwlwifi power_save=1
+    '';
 
     # Enable sound with pipewire.
     sound.enable = true;
