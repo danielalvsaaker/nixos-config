@@ -23,18 +23,13 @@ in
 
     profiles-cli = {
       imports = with config.flake.homeManagerModules; [
-        programs-helix
-        programs-git
+        programs-direnv
         programs-fish
+        programs-git
+        programs-helix
         programs-starship
         programs-fzf
       ];
-
-      programs.direnv = {
-        enable = true;
-        nix-direnv.enable = true;
-        config.global.hide_env_diff = true;
-      };
     };
   };
 }
