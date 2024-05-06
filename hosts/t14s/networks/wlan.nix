@@ -6,4 +6,6 @@
       IgnoreCarrierLoss = "3s";
     };
   };
+
+  networking.wireless.iwd.enable = true;
 }

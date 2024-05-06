@@ -17,6 +17,7 @@
 
     home.packages = [
       pkgs.jetbrains.rider
+      pkgs.obsidian
     ];
 
     programs.git = {

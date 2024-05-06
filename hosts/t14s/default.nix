@@ -34,7 +34,6 @@ let
     networking = {
       hostName = "t14s";
       useDHCP = false;
-      wireless.iwd.enable = true;
     };
 
     systemd.network = {
@@ -52,7 +51,7 @@ let
       PLATFORM_PROFILE_ON_BAT = "low-power";
     };
     boot.extraModprobeConfig = ''
-      options iwlwifi power_save=1
+      options iwlwifi power_save=1 11n_disable=1
     '';
 
     # Enable sound with pipewire.

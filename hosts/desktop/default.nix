@@ -75,8 +75,8 @@ let
     services.xserver = {
       xkb.layout = lib.mkDefault "us";
       xkb.variant = lib.mkDefault "colemak_dh";
-      libinput.enable = true;
     };
+    services.libinput.enable = true;
 
     xdg.portal = {
       enable = true;

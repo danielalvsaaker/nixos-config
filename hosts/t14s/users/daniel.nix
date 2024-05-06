@@ -13,6 +13,7 @@
 
     home.packages = [
       pkgs.jetbrains.rider
+      pkgs.obsidian
     ];
 
     dconf.settings."org/gnome/desktop/background" = {

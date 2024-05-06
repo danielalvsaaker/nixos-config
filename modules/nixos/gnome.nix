@@ -5,8 +5,8 @@
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
     updateDbusEnvironment = true;
-    libinput.enable = true;
   };
+  services.libinput.enable = true;
 
   services.gnome.core-shell.enable = lib.mkForce false;
   services.gnome.core-utilities.enable = lib.mkForce false;
