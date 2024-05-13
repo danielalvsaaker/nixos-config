@@ -10,6 +10,6 @@
       programs-firefox
     ];
 
-    home.packages = [ pkgs.minecraft ];
+    # home.packages = [ pkgs.minecraft ];
   };
 }

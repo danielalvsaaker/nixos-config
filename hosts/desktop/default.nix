@@ -13,22 +13,12 @@ let
       steam
       sway
       bluetooth
-      # kernel
+      plymouth
+      gnome
     ]) ++
     [
       ./hardware-configuration.nix
     ];
-
-    specialisation.gnome.configuration = {
-      imports = with inputs.self.nixosModules; [
-        gnome
-      ];
-
-      services.xserver = {
-        xkb.layout = "no";
-        xkb.variant = "";
-      };
-    };
 
     system.stateVersion = "22.11";
 
@@ -51,7 +41,6 @@ let
 
     boot.supportedFilesystems = [ "bcachefs" ];
 
-    # systemd.network.enable = true;
     networking.hostName = "desktop"; # Define your hostname.
 
     networking.useDHCP = false;
@@ -71,12 +60,6 @@ let
       enable = true;
       driSupport = true;
     };
-
-    services.xserver = {
-      xkb.layout = lib.mkDefault "us";
-      xkb.variant = lib.mkDefault "colemak_dh";
-    };
-    services.libinput.enable = true;
 
     xdg.portal = {
       enable = true;

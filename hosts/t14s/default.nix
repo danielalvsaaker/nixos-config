@@ -27,7 +27,6 @@ let
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.efi.efiSysMountPoint = "/boot";
     boot.initrd.systemd.enable = true;
-    services.xserver.displayManager.gdm.enable = true;
 
     services.fwupd.enable = true;
 
