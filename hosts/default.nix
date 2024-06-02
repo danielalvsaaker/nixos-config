@@ -3,5 +3,6 @@
     ./t14s
     ./desktop
     ./wsl
+    ./iso
   ];
 }

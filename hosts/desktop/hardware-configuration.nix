@@ -16,7 +16,8 @@
 
   fileSystems."/" =
     {
-      device = "/dev/nvme0n1p3:/dev/sda";
+      #device = "/dev/nvme0n1p3:/dev/sda";
+      device = "UUID=0cbb502c-c7ae-473d-8650-3f7fe80d04b7";
       fsType = "bcachefs";
     };
 
