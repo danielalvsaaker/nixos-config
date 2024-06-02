@@ -15,6 +15,7 @@ let
       bluetooth
       plymouth
       gnome
+      lact
     ]) ++
     [
       ./hardware-configuration.nix
@@ -46,8 +47,8 @@ let
     networking.useDHCP = false;
     systemd.network = {
       enable = true;
-      networks."10-enp4s0" = {
-        matchConfig.Name = "enp4s0";
+      networks."10-enp5s0" = {
+        matchConfig.Name = "enp5s0";
         networkConfig.DHCP = "yes";
       };
     };
