@@ -21,6 +21,7 @@
   programs.dconf.enable = true;
   security.polkit.enable = true;
   services.accounts-daemon.enable = true;
+  services.upower.enable = true;
 
   xdg.mime.enable = true;
   xdg.icons.enable = true;

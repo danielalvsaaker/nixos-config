@@ -1,7 +1,8 @@
 {
   imports = [
-    ./t14s
     ./desktop
+    ./t14s
+    ./p15v
     ./wsl
   ];
 }

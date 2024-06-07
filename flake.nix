@@ -2,6 +2,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     nixos-wsl = {
@@ -24,7 +26,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    falcon-sensor-nixos = {
+      url = "git+ssh://git@github.com/bouvet/falcon-sensor-nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
   };
 
   outputs = { flake-parts, ... } @ inputs:
