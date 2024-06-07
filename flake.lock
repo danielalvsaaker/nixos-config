@@ -45,15 +45,15 @@
       "locked": {
         "lastModified": 1717749399,
         "narHash": "sha256-Cg/BmsoHyQoqhtmQ3K8fuZca0AEKN7o/45It5sBX+O4=",
-        "ref": "refs/heads/main",
+        "owner": "bouvet",
+        "repo": "falcon-sensor-nixos",
         "rev": "c87971e8978039fc8b5b5cab9c47be8681f42560",
-        "revCount": 3,
-        "type": "git",
-        "url": "ssh://git@github.com/bouvet/falcon-sensor-nixos"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/bouvet/falcon-sensor-nixos"
+        "owner": "bouvet",
+        "repo": "falcon-sensor-nixos",
+        "type": "github"
       }
     },
     "firefox-addons": {
