@@ -21,7 +21,7 @@ let
       ./hardware-configuration.nix
     ];
 
-    system.stateVersion = "22.11";
+    system.stateVersion = "24.11";
 
     services.fwupd.enable = true;
 
@@ -32,15 +32,14 @@ let
 
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
+        efiSysMountPoint = "/boot";
       };
+
     };
 
     boot.kernelModules = [ "zenpower" ];
     boot.extraModulePackages = [ config.boot.kernelPackages.zenpower ];
     boot.blacklistedKernelModules = [ "k10temp" ];
-
-    boot.supportedFilesystems = [ "bcachefs" ];
 
     networking.hostName = "desktop"; # Define your hostname.
 
