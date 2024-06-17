@@ -9,4 +9,8 @@
       "${pkgs.cloudflare-warp}/share/:/usr/share/"
     ];
   };
+
+  services.resolved.extraConfig = ''
+    ResolveUnicastSingleLabel=yes
+  '';
 }
