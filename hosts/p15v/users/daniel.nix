@@ -26,12 +26,20 @@
       pkgs.citrix_workspace
       pkgs.azuredatastudio
       pkgs.azure-cli
+      pkgs.meld
     ];
 
-    dconf.settings."org/gnome/desktop/background" = {
-      color-shading-type = "solid";
-      picture-options = "zoom";
-      picture-uri = pkgs.nixos-artwork.wallpapers.dracula.gnomeFilePath;
+    dconf.settings = {
+      "org/gnome/desktop/background" = {
+        color-shading-type = "solid";
+        picture-options = "zoom";
+        picture-uri = "${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/ring-l.jxl";
+        picture-uri-dark = "${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/ring-d.jxl";
+      };
+
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
     };
 
     programs.git = {

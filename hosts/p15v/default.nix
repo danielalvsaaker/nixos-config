@@ -45,6 +45,8 @@ let
       enable = true;
     };
 
+    nix.settings.preallocate-contents = false;
+
     # Select internationalisation properties.
     i18n.defaultLocale = "nb_NO.UTF-8";
 
