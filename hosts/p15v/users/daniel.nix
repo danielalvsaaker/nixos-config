@@ -33,8 +33,8 @@
       "org/gnome/desktop/background" = {
         color-shading-type = "solid";
         picture-options = "zoom";
-        picture-uri = "${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/ring-l.jxl";
-        picture-uri-dark = "${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/ring-d.jxl";
+        picture-uri = "file://${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/ring-l.jxl";
+        picture-uri-dark = "file://${pkgs.gnome.gnome-backgrounds}/share/backgrounds/gnome/ring-d.jxl";
       };
 
       "org/gnome/desktop/interface" = {
