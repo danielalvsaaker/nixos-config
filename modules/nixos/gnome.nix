@@ -5,6 +5,7 @@
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
     updateDbusEnvironment = true;
+    excludePackages = [ pkgs.xterm ];
   };
   services.libinput.enable = true;
 
@@ -16,6 +17,7 @@
     rygel.enable = false;
     gnome-keyring.enable = true;
   };
+  environment.gnome.excludePackages = [ pkgs.gnome-tour ];
   services.avahi.enable = false;
 
   programs.dconf.enable = true;
