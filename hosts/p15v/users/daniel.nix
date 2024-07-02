@@ -24,9 +24,17 @@
       pkgs.slack
       pkgs.cloudflare-warp
       pkgs.citrix_workspace
+      pkgs.azurite
       pkgs.azuredatastudio
       pkgs.azure-cli
       pkgs.meld
+      pkgs.azure-functions-core-tools
+      (with pkgs.dotnetCorePackages; combinePackages [
+        sdk_8_0
+        aspnetcore_8_0
+        sdk_6_0
+        aspnetcore_6_0
+      ])
     ];
 
     dconf.settings = {

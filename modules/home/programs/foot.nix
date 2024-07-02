@@ -1,6 +1,8 @@
 {
   programs.foot = {
     enable = true;
+    server.enable = true;
+
     settings = {
       main = {
         font = "BlexMono Nerd Font Mono:size=10";

@@ -11,7 +11,6 @@ in
         programs-foot
         programs-firefox
         programs-element
-        programs-sway
         services-syncthing
       ];
 
