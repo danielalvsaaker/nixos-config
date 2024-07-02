@@ -23,15 +23,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    falcon-sensor-nixos = {
+      url = "github:bouvet/falcon-sensor-nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    falcon-sensor-nixos = {
-      url = "github:bouvet/falcon-sensor-nixos";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
+    firefox-gnome-theme = {
+      url = "github:rafaelmardojai/firefox-gnome-theme";
+      flake = false;
     };
   };
 

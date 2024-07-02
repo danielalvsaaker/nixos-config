@@ -7,9 +7,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = {
-      firefox-addons = inputs.firefox-addons.packages.${pkgs.hostPlatform.system};
-    };
+    extraSpecialArgs = { inherit inputs; };
 
     sharedModules = [
       {
