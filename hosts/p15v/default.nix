@@ -72,11 +72,7 @@ let
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     security.polkit.enable = true;
-    hardware.opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-    };
+    hardware.graphics.enable = true;
     services.pipewire = {
       enable = true;
       alsa.enable = true;

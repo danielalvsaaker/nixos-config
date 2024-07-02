@@ -56,10 +56,7 @@ let
 
     i18n.defaultLocale = "nb_NO.UTF-8";
 
-    hardware.opengl = {
-      enable = true;
-      driSupport = true;
-    };
+    hardware.graphics.enable = true;
 
     xdg.portal = {
       enable = true;
