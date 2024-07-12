@@ -7,6 +7,7 @@ in
   flake.homeManagerModules = modules // {
     profiles-desktop = {
       imports = with config.flake.homeManagerModules; [
+        programs-blackbox
         programs-discord
         programs-foot
         programs-firefox
