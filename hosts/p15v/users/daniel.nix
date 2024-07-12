@@ -16,6 +16,7 @@
     imports = with inputs.self.homeManagerModules; [
       profiles-desktop
       profiles-cli
+      programs-blackbox
     ];
 
     home.packages = [
