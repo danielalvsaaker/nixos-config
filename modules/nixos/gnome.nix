@@ -25,6 +25,7 @@
   security.polkit.enable = true;
   services.accounts-daemon.enable = true;
   services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
 
   services.gnome.sushi.enable = true;
   programs.evince.enable = true;
@@ -46,7 +47,7 @@
 
   environment = {
     systemPackages = [
-      pkgs.gnome.nautilus
+      pkgs.nautilus
       pkgs.loupe
       pkgs.sound-theme-freedesktop
       pkgs.gnomeExtensions.appindicator
