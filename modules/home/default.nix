@@ -14,10 +14,7 @@ in
         services-syncthing
       ];
 
-      services = {
-        mpris-proxy.enable = true;
-        playerctld.enable = true;
-      };
+      services.mpris-proxy.enable = true;
     };
 
     profiles-cli = {
