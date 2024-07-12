@@ -11,7 +11,6 @@ let
     (with inputs.self.nixosModules; [
       default
       steam
-      sway
       bluetooth
       plymouth
       gnome

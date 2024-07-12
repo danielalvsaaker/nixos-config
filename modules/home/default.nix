@@ -12,6 +12,7 @@ in
         programs-firefox
         programs-element
         services-syncthing
+        gnome
       ];
 
       services.mpris-proxy.enable = true;
