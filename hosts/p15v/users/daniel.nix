@@ -12,7 +12,7 @@
 
   programs.fish.enable = true;
 
-  home-manager.users."daniel.alvsaker" = { config, pkgs, firefox-addons, ... }: {
+  home-manager.users."daniel.alvsaker" = { lib, pkgs, firefox-addons, ... }: {
     imports = with inputs.self.homeManagerModules; [
       profiles-desktop
       profiles-cli
@@ -25,7 +25,7 @@
       pkgs.cloudflare-warp
       pkgs.citrix_workspace
       pkgs.azurite
-      pkgs.azuredatastudio
+      # pkgs.azuredatastudio
       pkgs.azure-cli
       pkgs.meld
       pkgs.azure-functions-core-tools
@@ -47,6 +47,28 @@
 
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
+      };
+
+      "org/gnome/desktop/input-sources" = {
+        show-all-sources = false;
+        per-window = true;
+        sources = with lib.hm.gvariant; [
+          (mkTuple [ "xkb" "us+colemak_dh" ])
+          (mkTuple [ "xkb" "us" ])
+        ];
+      };
+
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = [
+          "appindicatorsupport@rgcjonas.gmail.com"
+        ];
+      };
+
+      "org/gnome/mutter" = {
+        dynamic-workspaces = true;
+        edge-tiling = true;
+        workspaces-only-on-primary = false;
       };
     };
 

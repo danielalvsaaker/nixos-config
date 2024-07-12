@@ -6,7 +6,7 @@ let
       common-pc-laptop
       common-pc-laptop-ssd
       common-gpu-nvidia-disable
-      "${inputs.nixos-hardware}/common/cpu/intel/tiger-lake"
+      "${inputs.nixos-hardware}/common/gpu/intel/tiger-lake"
     ]) ++
     (with inputs.self.nixosModules; [
       default
@@ -22,18 +22,6 @@ let
       inputs.falcon-sensor-nixos.nixosModules.default
       ./hardware-configuration.nix
       ./networks/wlan.nix
-    ];
-
-    system.replaceRuntimeDependencies = [
-      ({
-        original = pkgs.mesa;
-        replacement = inputs.nixpkgs-staging.legacyPackages.x86_64-linux.mesa;
-      })
-
-      ({
-        original = pkgs.mesa.drivers;
-        replacement = inputs.nixpkgs-staging.legacyPackages.x86_64-linux.mesa.drivers;
-      })
     ];
 
     system.stateVersion = "24.05";
