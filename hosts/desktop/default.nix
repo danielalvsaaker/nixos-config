@@ -62,7 +62,6 @@ let
       xdgOpenUsePortal = true;
     };
 
-    sound.enable = true;
     hardware.pulseaudio.enable = false;
     security.polkit.enable = true;
     security.rtkit.enable = true;

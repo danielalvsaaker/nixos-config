@@ -56,7 +56,6 @@ let
     i18n.defaultLocale = "nb_NO.UTF-8";
 
     # Enable sound with pipewire.
-    sound.enable = true;
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     security.polkit.enable = true;
