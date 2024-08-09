@@ -5,7 +5,7 @@ let
 in
 {
   flake.nixosModules = modules // {
-    default = { lib, ... }: {
+    default = {
       imports = [
         config.flake.nixosModules.font
         config.flake.nixosModules.nix

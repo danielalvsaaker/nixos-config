@@ -12,7 +12,7 @@
 
   programs.fish.enable = true;
 
-  home-manager.users."daniel.alvsaker" = { lib, pkgs, firefox-addons, ... }: {
+  home-manager.users."daniel.alvsaker" = { lib, pkgs, ... }: {
     imports = with inputs.self.homeManagerModules; [
       profiles-desktop
       profiles-cli
