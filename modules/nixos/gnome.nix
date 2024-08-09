@@ -26,6 +26,7 @@
   services.accounts-daemon.enable = true;
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;
+  services.gnome.evolution-data-server.enable = true;
 
   services.gnome.sushi.enable = true;
   programs.evince.enable = true;
@@ -51,6 +52,8 @@
       pkgs.loupe
       pkgs.sound-theme-freedesktop
       pkgs.gnomeExtensions.appindicator
+      pkgs.gnome.gnome-weather
+      pkgs.gnome-calendar
     ];
     pathsToLink = [ "/share" ];
   };
