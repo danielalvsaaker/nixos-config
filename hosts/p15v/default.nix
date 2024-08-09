@@ -21,11 +21,12 @@ let
     [
       inputs.falcon-sensor-nixos.nixosModules.default
       ./hardware-configuration.nix
-      ./networks/wlan.nix
     ];
 
     system.stateVersion = "24.05";
     time.timeZone = "Europe/Oslo";
+
+    boot.kernelPackages = pkgs.linuxPackages_6_9;
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
@@ -42,12 +43,15 @@ let
 
     networking = {
       hostName = "p15v";
-      useDHCP = false;
-      wireless.iwd.enable = true;
+      networkmanager = {
+        enable = true;
+        wifi.backend = "iwd";
+      };
     };
 
     systemd.network = {
       enable = true;
+      wait-online.enable = false;
     };
 
     nix.settings.preallocate-contents = false;
