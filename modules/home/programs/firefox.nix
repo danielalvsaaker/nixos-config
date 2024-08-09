@@ -34,6 +34,7 @@
         "extensions.autoDisableScopes" = 0;
         "extensions.getAddons.showPane" = false;
         "extensions.htmlaboutaddons.recommendations.enabled" = false;
+        "dom.private-attribution.submission.enabled" = false;
         "browser.discovery.enabled" = false;
         "browser.translations.automaticallyPopup" = false;
 
