@@ -4,7 +4,7 @@
     defaultEditor = true;
 
     settings = {
-      theme = "fleet_dark";
+      theme = "adwaita-dark";
       editor = {
         line-number = "relative";
         true-color = true;

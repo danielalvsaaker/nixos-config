@@ -5,6 +5,7 @@
   dconf.settings."com/raggesilver/BlackBox" = with lib.hm.gvariant; {
     "font" = "Monospace 10";
     "terminal-padding" = mkTuple (lib.replicate 4 (mkUint32 5));
-    "theme-dark" = "Dracula";
+    "theme-dark" = "Adwaita Dark";
+    "theme" = "Adwaita";
   };
 }
