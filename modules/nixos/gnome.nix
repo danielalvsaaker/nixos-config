@@ -37,7 +37,7 @@
   xdg.portal = {
     enable = true;
 
-    configPackages = [ pkgs.gnome.gnome-session ];
+    configPackages = [ pkgs.gnome-session ];
     extraPortals = [
       pkgs.xdg-desktop-portal-gnome
       (pkgs.xdg-desktop-portal-gtk.override {
@@ -52,10 +52,11 @@
       pkgs.loupe
       pkgs.sound-theme-freedesktop
       pkgs.gnomeExtensions.appindicator
-      pkgs.gnome.gnome-weather
+      pkgs.gnome-weather
       pkgs.gnome-calendar
+      pkgs.resources
     ];
     pathsToLink = [ "/share" ];
   };
-  services.udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
+  services.udev.packages = [ pkgs.gnome-settings-daemon ];
 }

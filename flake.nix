@@ -28,7 +28,7 @@
     };
 
     falcon-sensor-nixos = {
-      url = "github:bouvet/falcon-sensor-nixos";
+      url = "git+ssh://git@github.com/bouvet/falcon-sensor-nixos";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
     };
