@@ -8,6 +8,10 @@
       picture-uri-dark = "file://${pkgs.gnome-backgrounds}/share/backgrounds/gnome/ring-d.jxl";
     };
 
+    "org/gnome/desktop/calendar" = {
+      show-weekdate = true;
+    };
+
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
     };
