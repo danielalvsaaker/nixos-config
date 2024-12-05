@@ -1,60 +1,60 @@
 { pkgs, lib, ... }:
+
+let
+  core-os-services = {
+    services.gnome.core-os-services.enable = true;
+
+    services.dleyna-renderer.enable = false;
+    services.dleyna-server.enable = false;
+    services.hardware.bolt.enable = false;
+  };
+
+  core-shell = {
+    services.gnome.core-shell.enable = true;
+
+    services.gnome.gnome-browser-connector.enable = false;
+    services.gnome.gnome-initial-setup.enable = false;
+    services.gnome.gnome-user-share.enable = false;
+    services.gnome.rygel.enable = false;
+    services.avahi.enable = false;
+    environment.gnome.excludePackages = [ pkgs.gnome-tour ];
+  };
+
+  core-utilities = {
+    services.gnome.core-utilities.enable = true;
+
+    environment.gnome.excludePackages = [
+      pkgs.epiphany
+      pkgs.gnome-console
+      pkgs.gnome-logs
+      pkgs.geary
+      pkgs.totem
+      pkgs.yelp
+      pkgs.seahorse
+    ];
+  };
+
+in
+lib.foldl' lib.recursiveUpdate
 {
   services.xserver = {
     enable = true;
 
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-    updateDbusEnvironment = true;
-    excludePackages = [ pkgs.xterm ];
-  };
-  services.libinput.enable = true;
-
-  services.gnome = {
-    core-utilities.enable = lib.mkForce false;
-    core-os-services.enable = lib.mkForce false;
-
-    gnome-remote-desktop.enable = false;
-    rygel.enable = false;
-    gnome-keyring.enable = true;
-  };
-  environment.gnome.excludePackages = [ pkgs.gnome-tour ];
-  services.avahi.enable = false;
-
-  programs.dconf.enable = true;
-  security.polkit.enable = true;
-  services.accounts-daemon.enable = true;
-  services.upower.enable = true;
-  services.power-profiles-daemon.enable = true;
-  services.gnome.evolution-data-server.enable = true;
-
-  services.gnome.sushi.enable = true;
-  programs.evince.enable = true;
-
-  xdg.mime.enable = true;
-  xdg.icons.enable = true;
-
-  xdg.portal = {
-    enable = true;
-
-    configPackages = [ pkgs.gnome-session ];
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gnome
-      pkgs.xdg-desktop-portal-gtk
-    ];
   };
 
   environment = {
     systemPackages = [
-      pkgs.nautilus
-      pkgs.loupe
-      pkgs.sound-theme-freedesktop
       pkgs.gnomeExtensions.appindicator
-      pkgs.gnome-weather
-      pkgs.gnome-calendar
       pkgs.resources
+      pkgs.showtime
+      pkgs.papers
+      pkgs.key-rack
     ];
-    pathsToLink = [ "/share" ];
   };
-  services.udev.packages = [ pkgs.gnome-settings-daemon ];
-}
+} [
+  core-shell
+  core-os-services
+  core-utilities
+]
