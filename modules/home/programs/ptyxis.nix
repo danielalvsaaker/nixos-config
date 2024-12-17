@@ -13,6 +13,7 @@
 
         cursor-shape = "block";
         interface-style = "system";
+        restore-session = false;
       };
 
       "org/gnome/Ptyxis/Profiles/${default-profile-uuid}" = {
