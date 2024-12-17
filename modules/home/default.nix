@@ -9,7 +9,6 @@ in
       imports = with config.flake.homeManagerModules; [
         programs-discord
         programs-firefox
-        programs-element
         programs-ptyxis
         services-syncthing
         gnome
