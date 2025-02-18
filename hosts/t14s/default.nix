@@ -7,20 +7,21 @@ let
     ]) ++
     (with inputs.self.nixosModules; [
       default
-      sway
       bluetooth
       lanzaboote
       plymouth
       gnome
       fprint
+      steam
     ]) ++
     [
       ./hardware-configuration.nix
-      ./networks/wlan.nix
     ];
 
     system.stateVersion = "24.05";
     time.timeZone = "Europe/Oslo";
+
+    networking.firewall.checkReversePath = "loose";
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
@@ -32,25 +33,22 @@ let
 
     networking = {
       hostName = "t14s";
-      useDHCP = false;
+      networkmanager = {
+        enable = true;
+        wifi.backend = "iwd";
+      };
     };
 
     systemd.network = {
       enable = true;
+      wait-online.enable = false;
     };
 
     # Select internationalisation properties.
     i18n.defaultLocale = "nb_NO.UTF-8";
 
-    services.tlp.settings = {
-      DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth";
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      PLATFORM_PROFILE_ON_AC = "performance";
-      PLATFORM_PROFILE_ON_BAT = "low-power";
-    };
     boot.extraModprobeConfig = ''
-      options iwlwifi power_save=1 11n_disable=1
+      options iwlwifi 11n_disable=8
     '';
 
     # Enable sound with pipewire.
