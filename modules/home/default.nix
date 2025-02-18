@@ -22,6 +22,7 @@ in
         programs-direnv
         programs-fish
         programs-git
+        programs-jujutsu
         programs-helix
         programs-starship
         programs-fzf
