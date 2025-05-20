@@ -13,6 +13,7 @@ let
       gnome
       fprint
       steam
+      zram
     ]) ++
     [
       ./hardware-configuration.nix
@@ -50,6 +51,8 @@ let
     boot.extraModprobeConfig = ''
       options iwlwifi 11n_disable=8
     '';
+
+    services.zram-generator.settings.zram0.compression-algorithm = "lz4";
 
     # Enable sound with pipewire.
     hardware.pulseaudio.enable = false;
