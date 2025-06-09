@@ -15,7 +15,7 @@
     };
 
     profiles.default = {
-      extensions = with inputs.firefox-addons.packages.${pkgs.hostPlatform.system}; [
+      extensions.packages = with inputs.firefox-addons.packages.${pkgs.hostPlatform.system}; [
         bitwarden
         decentraleyes
         multi-account-containers

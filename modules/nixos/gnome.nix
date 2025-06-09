@@ -4,9 +4,8 @@ let
   core-os-services = {
     services.gnome.core-os-services.enable = true;
 
-    services.dleyna-renderer.enable = false;
-    services.dleyna-server.enable = false;
-    services.hardware.bolt.enable = false;
+    services.dleyna.enable = false;
+    xdg.portal.xdgOpenUsePortal = true;
   };
 
   core-shell = {
@@ -20,8 +19,8 @@ let
     environment.gnome.excludePackages = [ pkgs.gnome-tour ];
   };
 
-  core-utilities = {
-    services.gnome.core-utilities.enable = true;
+  core-apps = {
+    services.gnome.core-apps.enable = true;
 
     environment.gnome.excludePackages = [
       pkgs.epiphany
@@ -37,12 +36,8 @@ let
 in
 lib.foldl' lib.recursiveUpdate
 {
-  services.xserver = {
-    enable = true;
-
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-  };
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   environment = {
     systemPackages = [
@@ -56,5 +51,5 @@ lib.foldl' lib.recursiveUpdate
 } [
   core-shell
   core-os-services
-  core-utilities
+  core-apps
 ]
