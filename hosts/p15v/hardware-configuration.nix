@@ -16,33 +16,33 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/a10058bd-5124-4c3f-9f84-be094d9df415";
+      device = "/dev/mapper/root";
       fsType = "btrfs";
       options = [
         "subvol=root"
-        "compress=zstd"
+        "compress=zstd:1"
         "noatime"
       ];
     };
 
   fileSystems."/home" =
     {
-      device = "/dev/disk/by-uuid/a10058bd-5124-4c3f-9f84-be094d9df415";
+      device = "/dev/mapper/root";
       fsType = "btrfs";
       options = [
         "subvol=home"
-        "compress=zstd"
+        "compress=zstd:1"
         "noatime"
       ];
     };
 
   fileSystems."/nix" =
     {
-      device = "/dev/disk/by-uuid/a10058bd-5124-4c3f-9f84-be094d9df415";
+      device = "/dev/mapper/root";
       fsType = "btrfs";
       options = [
         "subvol=nix"
-        "compress=zstd"
+        "compress=zstd:1"
         "noatime"
       ];
     };
@@ -54,13 +54,12 @@
       options = [ "umask=0077" ];
     };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/fb1fa53d-820f-4de5-b80b-b71ee157cc8e"; }];
-
   boot.initrd.luks.devices.root = {
-    device = "/dev/disk/by-uuid/79ad2842-9104-48a8-8070-b739f673e9ca";
-    preLVM = true;
+    device = "/dev/disk/by-uuid/f966830d-ab2f-432c-92ff-fd09831e9ed5";
+
     allowDiscards = true;
+    bypassWorkqueues = true;
+    crypttabExtraOpts = [ "tpm2-device=auto" "tpm2-measure-pcr=yes" ];
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
