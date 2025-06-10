@@ -1,10 +1,15 @@
-{ config, ... }:
+{ self, config, lib, ... }:
 
 let
   modules = config.flake.lib.modules.generateModules ./.;
+  modules' = builtins.mapAttrs
+    (_: module:
+      lib.modules.importApply module { inherit self; }
+    )
+    modules;
 in
 {
-  flake.homeManagerModules = modules // {
+  flake.homeManagerModules = modules' // {
     profiles-desktop = {
       imports = with config.flake.homeManagerModules; [
         programs-firefox

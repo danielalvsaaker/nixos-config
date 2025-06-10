@@ -1,4 +1,5 @@
-{ inputs, pkgs, ... }:
+{ self }:
+{ pkgs, ... }:
 {
   programs.firefox = {
     enable = true;
@@ -15,19 +16,18 @@
     };
 
     profiles.default = {
-      extensions.packages = with inputs.firefox-addons.packages.${pkgs.hostPlatform.system}; [
+      extensions.packages = with self.inputs.firefox-addons.packages.${pkgs.hostPlatform.system}; [
         bitwarden
-        decentraleyes
         multi-account-containers
         ublock-origin
       ];
 
       userChrome = ''
-        @import "${inputs.firefox-gnome-theme}/userChrome.css";
+        @import "${self.inputs.firefox-gnome-theme}/userChrome.css";
       '';
 
       userContent = ''
-        @import "${inputs.firefox-gnome-theme}/userContent.css";
+        @import "${self.inputs.firefox-gnome-theme}/userContent.css";
       '';
 
       settings = {

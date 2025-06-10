@@ -1,3 +1,4 @@
+{ ... }:
 {
   users.users.stine = {
     isNormalUser = true;

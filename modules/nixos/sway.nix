@@ -1,3 +1,4 @@
+{ ... }:
 {
   programs.sway.enable = true;
 

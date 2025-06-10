@@ -1,3 +1,4 @@
+{ ... }:
 { lib, ... }:
 {
   services.zram-generator = {

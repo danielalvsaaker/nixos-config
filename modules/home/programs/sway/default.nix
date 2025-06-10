@@ -1,3 +1,4 @@
+{ ... }:
 { config, lib, pkgs, osConfig, ... }:
 {
   imports = [ ./bar ];

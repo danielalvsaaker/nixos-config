@@ -1,7 +1,8 @@
-{ inputs, lib, pkgs, ... }:
+{ self }:
+{ lib, pkgs, ... }:
 {
   imports = [
-    inputs.lanzaboote.nixosModules.lanzaboote
+    self.inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   environment.systemPackages = [

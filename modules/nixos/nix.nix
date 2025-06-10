@@ -1,7 +1,8 @@
-{ inputs, ... }:
+{ self }:
+{ ... }:
 {
   imports = [
-    inputs.nix-index-database.nixosModules.nix-index
+    self.inputs.nix-index-database.nixosModules.nix-index
   ];
 
   nix = {

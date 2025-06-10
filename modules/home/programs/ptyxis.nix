@@ -1,3 +1,4 @@
+{ ... }:
 { lib, pkgs, ... }:
 {
   home.packages = [ pkgs.ptyxis ];
