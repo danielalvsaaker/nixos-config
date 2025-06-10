@@ -5,7 +5,7 @@
 
     settings.zram0 = {
       zram-size = "ram";
-      compression-algorithm = lib.mkDefault "zstd";
+      compression-algorithm = lib.mkDefault "lz4";
     };
   };
 
@@ -16,5 +16,4 @@
     "vm.watermark_scale_factor" = 125;
     "vm.page-cluster" = 0;
   };
-
 }
