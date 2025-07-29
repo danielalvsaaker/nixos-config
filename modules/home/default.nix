@@ -7,10 +7,8 @@ in
   flake.homeManagerModules = modules // {
     profiles-desktop = {
       imports = with config.flake.homeManagerModules; [
-        programs-discord
         programs-firefox
         programs-ptyxis
-        services-syncthing
         gnome
       ];
 
