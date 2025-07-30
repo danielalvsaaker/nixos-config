@@ -42,14 +42,28 @@
       url = "github:rafaelmardojai/firefox-gnome-theme";
       flake = false;
     };
+
+    bcachefs-tools = {
+      url = "github:koverstreet/bcachefs-tools";
+    };
   };
 
   outputs = { flake-parts, ... } @ inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
-      perSystem = { pkgs, ... }: {
+      perSystem = { pkgs, inputs', system, ... }: {
         formatter = pkgs.nixpkgs-fmt;
+
+        packages.qemu-efi = pkgs.writeShellScriptBin "qemu-efi" ''
+          qemu-system-x86_64 \
+            -m 2048 \
+            -machine q35,accel=kvm \
+            -bios "${pkgs.OVMF.fd}/FV/OVMF.fd" \
+            -snapshot \
+            -serial stdio \
+            "$@"
+        '';
       };
 
       imports = [
