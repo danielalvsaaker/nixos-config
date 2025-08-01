@@ -1,6 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "https://github.com/nixos/nixpkgs/archive/pull/427698/head.tar.gz";
+    nixpkgs.url = "/home/daniel.alvsaker/Dokumenter/nixpkgs";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
@@ -48,7 +50,7 @@
     };
   };
 
-  outputs = { flake-parts, ... } @ inputs:
+  outputs = { self, flake-parts, ... } @ inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
@@ -60,10 +62,19 @@
             -m 2048 \
             -machine q35,accel=kvm \
             -bios "${pkgs.OVMF.fd}/FV/OVMF.fd" \
-            -snapshot \
             -serial stdio \
             "$@"
         '';
+
+        packages.update =
+          let config = self.nixosConfigurations.router.config;
+          in
+          pkgs.runCommand "update-${config.system.image.version}"
+            { } ''
+            mkdir -p $out
+            cp ${config.system.build.uki}/${config.system.boot.loader.ukiFile}  $out/
+            cp ${config.system.build.finalImage}/* $out/
+          '';
       };
 
       imports = [
