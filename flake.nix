@@ -48,7 +48,7 @@
     };
   };
 
-  outputs = { flake-parts, ... } @ inputs:
+  outputs = { self, flake-parts, ... } @ inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
@@ -60,10 +60,20 @@
             -m 2048 \
             -machine q35,accel=kvm \
             -bios "${pkgs.OVMF.fd}/FV/OVMF.fd" \
-            -snapshot \
             -serial stdio \
             "$@"
         '';
+
+        packages.update =
+          let config = self.nixosConfigurations.router.config;
+          in
+          pkgs.runCommand "update-${config.system.image.version}"
+            { } ''
+            mkdir -p $out
+            cp ${config.system.build.uki}/${config.system.boot.loader.ukiFile}  $out/${config.system.image.id}_${config.system.image.version}.efi
+            cp ${config.system.build.finalImage}/${config.image.baseName}.verity.raw $out/${config.system.image.id}_${config.system.image.version}.verity
+            cp ${config.system.build.finalImage}/${config.image.baseName}.usr.raw  $out/${config.system.image.id}_${config.system.image.version}.usr
+          '';
       };
 
       imports = [
