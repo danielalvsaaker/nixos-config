@@ -90,7 +90,11 @@ let
         {
           split = true;
           verityStore.enable = true;
-          mkfsOptions.erofs = [ "-Efragments,ztailpacking -zlz4hc,12 -C65536" ];
+          mkfsOptions.erofs = [ "-Efragments,ztailpacking"
+              
+            # "-C1048576"
+            "-zlz4hc,level=12"
+          ];
 
           partitions = {
             ${partitionIds.esp} = {
@@ -110,23 +114,23 @@ let
 
             ${partitionIds.store} = {
               repartConfig = {
-                Minimize = "best";
+                Minimize = "guess";
                 ReadOnly = 1;
                 Label = "usr-${config.system.image.version}";
-                # Label = "%M_%A";
+                SizeMaxBytes = "5G";
                 SplitName = "%t.%U";
               };
             };
 
             ${partitionIds.store-verity} = {
               repartConfig = {
-                # SizeMinBytes = "96M";
-                # SizeMaxBytes = "96M";
-                Minimize = "guess";
+                Weight = 0;
+                # Minimize = "b";
                 Label = "verity-${config.system.image.version}";
-                # Label = "%M_%A_verity";
                 SplitName = "%t.%U";
                 ReadOnly = 1;
+                VerityDataBlockSizeBytes = 512;
+                VerityHashBlockSizeBytes = 512;
               };
             };
           };
@@ -149,6 +153,8 @@ let
         };
       };
 
+      boot.initrd.systemd.initrdBin = [ pkgs.pciutils pkgs.util-linux ];
+      boot.initrd.availableKernelModules = [ "sd_mod" "sdhci" "dm_mod" "usbhid" "usb_storage" "sdhci_pci" ];
       boot.initrd.systemd.repart.enable = true;
 
       systemd.repart.partitions = {
@@ -169,37 +175,26 @@ let
         # };
 
         "20-usr-verity-a" = {
-          inherit (config.image.repart.partitions.${partitionIds.store-verity}.repartConfig) Type Verity;
-          VerityMatchKey = "store-a";
-          VerityHashBlockSizeBytes = 4096;
-          VerityDataBlockSizeBytes = 4096;
+          inherit (config.image.repart.partitions.${partitionIds.store-verity}.repartConfig) Type;
         };
 
         "22-usr-a" = {
-          inherit (config.image.repart.partitions.${partitionIds.store}.repartConfig) Type Verity;
-
-          VerityMatchKey = "store-a";
-          # Minimize = "guess";
-
-          # SizeMinBytes = "1G";
+          inherit (config.image.repart.partitions.${partitionIds.store}.repartConfig) Type;
           SizeMaxBytes = "5G";
-
-          # CopyBlocks = "auto";
+          ReadOnly = 1;
         };
 
         "30-usr-verity-b" = {
           # inherit (config.image.repart.partitions.${partitionIds.store-verity}.repartConfig) Type;
           inherit (config.image.repart.partitions.${partitionIds.store-verity}.repartConfig) Type Verity;
 
-          VerityMatchKey = "store-b";
+          VerityDataBlockSizeBytes = 512;
+          VerityHashBlockSizeBytes = 512;
 
-          # SizeMinBytes = "96M";
-          # SizeMaxBytes = "96M";
-          VerityHashBlockSizeBytes = 4096;
-          VerityDataBlockSizeBytes = 4096;
+          VerityMatchKey = "store-b";
+          Weight = 0;
           Label = "_empty";
-          Minimize = "guess";
-          # ReadOnly = 1;
+          ReadOnly = 1;
         };
 
         "32-usr-b" = {
@@ -207,12 +202,13 @@ let
           inherit (config.image.repart.partitions.${partitionIds.store}.repartConfig) Type Verity;
 
           VerityMatchKey = "store-b";
-          # Minimize = "guess";
 
-          # SizeMinBytes = "1G";
           SizeMaxBytes = "5G";
           Label = "_empty";
           ReadOnly = 1;
+
+          # Compression = "lz4hc";
+          # CompressionLevel = "12";
         };
 
         "40-var" = {
