@@ -1,7 +1,5 @@
 {
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "https://github.com/nixos/nixpkgs/archive/pull/427698/head.tar.gz";
     nixpkgs.url = "/home/daniel/Dokumenter/nixpkgs";
 
     nix-index-database = {

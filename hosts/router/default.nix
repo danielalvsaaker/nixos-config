@@ -13,48 +13,50 @@ let
       (with inputs.self.nixosModules; [
         kernel
         zram
-      ]);
+      ]) ++ [
+        ./networking.nix
+      ];
 
       system.image = {
         id = "router";
         version = "1";
       };
 
-      environment.systemPackages = [
-        pkgs.syncthing
-        pkgs.helix
-        pkgs.vim
-        pkgs.starship
-        pkgs.fish
-        # pkgs.bcachefs-tools
-      ];
+      system.nixos-init.enable = true;
+
+      services.openssh = {
+        enable = true;
+        settings.PermitRootLogin = "yes";
+      };
+
+      services.unbound = {
+        enable = true;
+
+        settings = {
+          server = {
+            interface = [ "127.0.0.1" "10.0.0.1" ];
+          };
+        };
+      };
+
+      networking.firewall.trustedInterfaces = [ "enp2s0" ];
 
       system.activationScripts.usrbinenv = lib.mkForce "";
+      environment.usrbinenv = null;
 
-      # nixpkgs.overlays = [
-      #   (final: prev: {
-      # systemd = prev.systemd.overrideAttrs {
-      #   src = /home/daniel.alvsaker/Dokumenter/systemd;
-      # };
-      #   })
-      # ];
-      #
-      
-      # boot.initrd.systemd.package = pkgs.systemd.overrideAttrs {
-      #   src = /home/daniel.alvsaker/Dokumenter/systemd;
-      # };
-      #
       boot.initrd.systemd.services = {
         systemd-repart.after = lib.mkForce [ ];
       };
 
-      environment.variables.UPDATED = "success";
-      #
       boot.initrd.systemd.emergencyAccess = true;
       boot.initrd.systemd.root = "tmpfs";
-      systemd.enableEmergencyMode= true;
+      systemd.enableEmergencyMode = true;
 
-      system.etc.overlay.enable = true;
+      system.etc.overlay = {
+        enable = true;
+        mutable = true;
+      };
+
       systemd.sysusers.enable = true;
       users.users.root.initialPassword = "a";
 
@@ -64,24 +66,13 @@ let
 
       boot.initrd.systemd.additionalUpstreamUnits = [ "initrd-usr-fs.target" ];
 
-      systemd.additionalUpstreamSystemUnits = [
-        "systemd-bless-boot.service"
-        "boot-complete.target"
-        # "systemd-firstboot.service"
-      ];
+      boot.kernelParams = [ "systemd.machine_id=b08dfa6083e7567a1921a715000001fb" ];
 
       boot.initrd.supportedFilesystems = {
-        ext4 = true;
+        # ext4 = true;
         vfat = true;
+        btrfs = true;
       };
-
-      boot.supportedFilesystems = {
-        vfat = true;
-      };
-
-      boot.kernelParams = [ "systemd.log_level=debug" ];
-
-      boot.initrd.compressorArgs = [ "-6" ];
 
       image.repart =
         let
@@ -90,9 +81,8 @@ let
         {
           split = true;
           verityStore.enable = true;
-          mkfsOptions.erofs = [ "-Efragments,ztailpacking"
-              
-            # "-C1048576"
+          mkfsOptions.erofs = [
+            "-Efragments,ztailpacking"
             "-zlz4hc,level=12"
           ];
 
@@ -137,11 +127,6 @@ let
         };
 
       fileSystems = {
-        # "/" = {
-        #   fsType = "tmpfs";
-        #   options = [ "mode=0755" ];
-        # };
-
         "/nix/store" = {
           device = "/usr/nix/store";
           options = [ "bind" ];
@@ -149,7 +134,8 @@ let
 
         "/var" = {
           device = "/dev/disk/by-partlabel/persistent";
-          fsType = "ext4";
+          options = [ "compress=zstd" ];
+          fsType = "btrfs";
         };
       };
 
@@ -213,11 +199,11 @@ let
 
         "40-var" = {
           Type = "var";
-          Format = "ext4";
+          Format = "btrfs";
           Label = "persistent";
           SizeMinBytes = "2G";
-          # Encrypt = "tpm2";
           SplitName = "-";
+          # Compression = "zstd";
 
           FactoryReset = "yes";
         };
