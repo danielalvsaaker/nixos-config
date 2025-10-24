@@ -15,29 +15,6 @@
         "type": "github"
       }
     },
-    "falcon-sensor-nixos": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1749048673,
-        "narHash": "sha256-kabc1PuHTf4D4KO4T6UZr8Fczmb1KEy4t2cZednuV3M=",
-        "ref": "refs/heads/main",
-        "rev": "c61eaedf78f0e7bdb48c99dd967a309d2bddc49a",
-        "revCount": 13,
-        "type": "git",
-        "url": "ssh://git@github.com/bouvet/falcon-sensor-nixos"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/bouvet/falcon-sensor-nixos"
-      }
-    },
     "firefox-addons": {
       "inputs": {
         "nixpkgs": [
@@ -312,7 +289,6 @@
     },
     "root": {
       "inputs": {
-        "falcon-sensor-nixos": "falcon-sensor-nixos",
         "firefox-addons": "firefox-addons",
         "firefox-gnome-theme": "firefox-gnome-theme",
         "flake-parts": "flake-parts",
