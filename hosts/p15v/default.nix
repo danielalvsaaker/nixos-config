@@ -73,9 +73,9 @@ let
   };
 in
 {
-  flake.nixosConfigurations.p15v = withSystem "x86_64-linux" ({ system, ... }:
+  flake.nixosConfigurations.p15v = withSystem "x86_64-linux" ({ pkgs, system, ... }:
     inputs.nixpkgs.lib.nixosSystem {
-      inherit system;
+      inherit pkgs system;
 
       specialArgs = { inherit inputs; };
 

@@ -48,8 +48,16 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
-      perSystem = { pkgs, ... }: {
+      perSystem = { pkgs, system, ... }: {
         formatter = pkgs.nixpkgs-fmt;
+
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+
+          config = {
+            allowUnfree = true;
+          };
+        };
       };
 
       imports = [
