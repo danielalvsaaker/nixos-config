@@ -42,6 +42,11 @@
       url = "github:rafaelmardojai/firefox-gnome-theme";
       flake = false;
     };
+
+    helix = {
+      url = "github:helix-editor/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { flake-parts, ... } @ inputs:
@@ -54,6 +59,7 @@
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
 
+          overlays = [ inputs.helix.overlays.default ];
           config = {
             allowUnfree = true;
           };
