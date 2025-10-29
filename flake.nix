@@ -36,6 +36,8 @@
       url = "github:helix-editor/helix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ki-editor.url = "github:ki-editor/ki-editor";
   };
 
   outputs = { flake-parts, ... } @ inputs:
