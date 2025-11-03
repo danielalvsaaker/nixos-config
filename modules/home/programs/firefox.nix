@@ -16,7 +16,7 @@
     };
 
     profiles.default = {
-      extensions.packages = with self.inputs.firefox-addons.packages.${pkgs.hostPlatform.system}; [
+      extensions.packages = with self.inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
         bitwarden
         multi-account-containers
         ublock-origin
