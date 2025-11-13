@@ -34,7 +34,7 @@ let
 
         settings = {
           server = {
-            interface = [ "127.0.0.1" "10.0.0.1" ];
+            interface = [ "127.0.0.1" "enp2s0" ];
           };
         };
       };
