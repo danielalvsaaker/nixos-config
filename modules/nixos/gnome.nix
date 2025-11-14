@@ -44,8 +44,6 @@ lib.foldl' lib.recursiveUpdate
     systemPackages = [
       pkgs.gnomeExtensions.appindicator
       pkgs.resources
-      pkgs.showtime
-      pkgs.papers
       pkgs.key-rack
     ];
   };
