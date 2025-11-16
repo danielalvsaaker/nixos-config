@@ -13,32 +13,74 @@ let
       (with inputs.self.nixosModules; [
         kernel
         zram
+        # nix
       ]) ++ [
         ./networking.nix
       ];
 
+      users.users.root = {
+        initialHashedPassword = "$y$j9T$SkKyCPFlR0OpfcmT83Cxk.$ynQ69D3RcUK0OJLw7JgYYVt0Z3VIQeO/UsUM0S2yq9A";
+        
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICg0H2fKwqZQ+GszVizE4gU2pgcmY0rbCii5qXr/35OT daniel@t14s"
+        ];
+      };
+
+      nixpkgs.config.allowUnfree = true;
+
       system.image = {
         id = "router";
-        version = "1";
+        version = "2";
       };
 
       system.nixos-init.enable = true;
 
       services.openssh = {
         enable = true;
-        settings.PermitRootLogin = "yes";
+
+        ports = [ 51022 ];
+
+        hostKeys = [
+          {
+            path = "/var/.rw-etc/ssh/ssh_host_ed25519_key";
+            type = "ed25519";
+          }
+        ];
       };
+
+      services.unifi.enable = true;
 
       services.unbound = {
         enable = true;
 
         settings = {
           server = {
-            interface = [ "127.0.0.1" "enp2s0" ];
+            interface = [ "127.0.0.1" "enp2s0" "iot" "lab" "untrusted" ];
+
+            prefetch = "yes";
+            serve-expired = "yes";
+            serve-expired-ttl = 86400;
+
+            cache-min-ttl = 300;
+
+            num-threads = 4;
+            outgoing-range = 8192;
+            num-queries-per-thread = 4096;
+            so-reuseport = "yes";
+
+            qname-minimisation = "yes";
+            aggressive-nsec = "yes";
+            harden-glue = "yes";
+            harden-dnssec-stripped = "yes";
+            harden-below-nxdomain = "yes";
+
+            hide-identity = "yes";
+            hide-version = "yes";
           };
         };
       };
 
+      networking.nftables.enable = true;
       networking.firewall.trustedInterfaces = [ "enp2s0" ];
 
       system.activationScripts.usrbinenv = lib.mkForce "";
@@ -58,7 +100,6 @@ let
       };
 
       systemd.sysusers.enable = true;
-      users.users.root.initialPassword = "a";
 
       security.sudo.enable = false;
 

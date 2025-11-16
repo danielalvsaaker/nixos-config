@@ -7,7 +7,7 @@
       };
 
       vlanConfig = {
-        Id = 20;
+        Id = 30;
       };
     };
 
@@ -18,7 +18,7 @@
       };
 
       address = [
-        "10.0.20.1/24"
+        "10.0.30.1/24"
       ];
 
       networkConfig = {
@@ -33,7 +33,8 @@
     };
   };
 
-  networking.nftables.tables."10-iot" = {
+  networking.nftables.tables."iot" = {
+    enable = false;
     family = "inet";
     content = ''
       chain forward {

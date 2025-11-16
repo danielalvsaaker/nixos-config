@@ -33,7 +33,8 @@
     };
   };
 
-  networking.nftables.tables."10-lab" = {
+  networking.nftables.tables."lab" = {
+    enable = false;
     family = "inet";
     content = ''
       chain forward {
@@ -55,5 +56,5 @@
         iifname "lab" tcp dport 53 accept
       }
     '';
-  }
+  };
 }

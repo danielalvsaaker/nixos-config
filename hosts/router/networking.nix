@@ -1,17 +1,27 @@
 {
+  imports = [
+    ./networking/iot.nix
+    ./networking/lab.nix
+  ];
+
+  networking.useNetworkd = true;
+  networking.useDHCP = false;
+  services.resolved.enable = false;
+  
   systemd.network = {
     enable = true;
     config = {
       networkConfig = {
+        IPv6Forwarding = true;
         SpeedMeter = true;
       };
     };
   };
 
   systemd.network = {
-    netdevs."10-iot" = {
+    netdevs."10-home" = {
       netdevConfig = {
-        Name = "iot";
+        Name = "home";
         Kind = "vlan";
       };
 
@@ -20,52 +30,18 @@
       };
     };
 
-    networks."11-iot" = {
+    networks."11-home" = {
       matchConfig = {
-        Name = "iot";
-        Type = "vlan";
-      };
-
-      address =[
-        "10.0.20.1/24"
-      ];
-
-      networkConfig = {
-        Description = "IoT";
-
-        DHCPServer = true;
-        IPv6SendRA = true;
-        IPv6AcceptRA = false;
-        IPMasquerade = "ipv4";
-        DHCPPrefixDelegation = true;
-      };
-    };
-  };
-
-  systemd.network = {
-    netdevs."10-lab" = {
-      netdevConfig = {
-        Name = "lab";
-        Kind = "vlan";
-      };
-
-      vlanConfig = {
-        Id = 10;
-      };
-    };
-
-    networks."11-lab" = {
-      matchConfig = {
-        Name = "lab";
+        Name = "home";
         Type = "vlan";
       };
 
       address = [
-        "10.0.10.1/24"
+        "10.0.20.1/24"
       ];
 
       networkConfig = {
-        Description = "Lab";
+        Description = "Home";
 
         DHCPServer = true;
         IPv6SendRA = true;
@@ -74,9 +50,7 @@
         DHCPPrefixDelegation = true;
       };
     };
-  };
 
-  systemd.network = {
     netdevs."10-untrusted" = {
       netdevConfig = {
         Name = "untrusted";
@@ -84,7 +58,7 @@
       };
 
       vlanConfig = {
-        Id = 30;
+        Id = 40;
       };
     };
 
@@ -95,7 +69,7 @@
       };
 
       address = [
-        "10.0.30.1/24"
+        "10.0.40.1/24"
       ];
 
       networkConfig = {
@@ -115,15 +89,9 @@
 
     networkConfig = {
       Description = "WAN";
-      
+
       DHCP = true;
       IPv6AcceptRA = true;
-
-      VLAN = [
-        "iot"
-        "lab"
-        "untrusted"
-      ];
     };
 
     dhcpV4Config = {
@@ -153,6 +121,13 @@
       IPMasquerade = "ipv4";
       DHCPPrefixDelegation = true;
       MulticastDNS = true;
+
+      VLAN = [
+        "home"
+        "iot"
+        "lab"
+        "untrusted"
+      ];
     };
   };
 }
