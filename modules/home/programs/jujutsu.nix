@@ -10,6 +10,12 @@
         email = "30574112+danielalvsaaker@users.noreply.github.com";
       };
 
+      signing = {
+        behavior = "own";
+        backend = "ssh";
+        key = "~/.ssh/id_ed25519.pub";
+      };
+
       ui = {
         pager = ":builtin";
         default-command = "log";
