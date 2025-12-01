@@ -11,6 +11,8 @@
       profiles-cli
     ];
 
+    home.stateVersion = "25.11";
+
     home.packages = [
       pkgs.jetbrains.rider
       pkgs.obsidian
@@ -27,9 +29,9 @@
       };
     };
 
-    programs.git = {
-      userName = "danielalvsaaker";
-      userEmail = "30574112+danielalvsaaker@users.noreply.github.com";
+    programs.git.settings.user = {
+      name = "danielalvsaaker";
+      email = "30574112+danielalvsaaker@users.noreply.github.com";
     };
   };
 }

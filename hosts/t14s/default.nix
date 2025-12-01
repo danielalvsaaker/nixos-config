@@ -19,7 +19,7 @@ let
       ./hardware-configuration.nix
     ];
 
-    system.stateVersion = "24.05";
+    system.stateVersion = "25.11";
     time.timeZone = "Europe/Oslo";
 
     networking.firewall.checkReversePath = "loose";
@@ -55,7 +55,6 @@ let
     services.zram-generator.settings.zram0.compression-algorithm = "lz4";
 
     # Enable sound with pipewire.
-    hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     security.polkit.enable = true;
     hardware.graphics.enable = true;

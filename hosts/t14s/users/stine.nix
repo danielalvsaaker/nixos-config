@@ -9,5 +9,7 @@
     imports = with inputs.self.homeManagerModules; [
       programs-firefox
     ];
+
+    home.stateVersion = "25.11";
   };
 }

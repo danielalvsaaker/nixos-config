@@ -20,7 +20,7 @@ let
       ./hardware-configuration.nix
     ];
 
-    system.stateVersion = "24.11";
+    system.stateVersion = "25.11";
 
     services.fwupd.enable = true;
 
@@ -62,7 +62,6 @@ let
       xdgOpenUsePortal = true;
     };
 
-    hardware.pulseaudio.enable = false;
     security.polkit.enable = true;
     security.rtkit.enable = true;
     services.pipewire = {

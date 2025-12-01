@@ -4,7 +4,7 @@
   programs.git = {
     enable = true;
 
-    aliases = {
+    settings.aliases = {
       ap = "add --patch";
       an = "commit --amend --no-edit";
     };
@@ -31,15 +31,7 @@
       "*.dart merge=mergiraf"
     ];
 
-    delta = {
-      enable = true;
-      options = {
-        navigate = true;
-        line-numbers = true;
-      };
-    };
-
-    extraConfig = {
+    settings = {
       pull.rebase = true;
       push.autoSetupRemote = true;
       core.editor = lib.getExe pkgs.helix;
@@ -47,4 +39,13 @@
       merge.mergiraf.driver = "${lib.getExe pkgs.mergiraf} merge --git %O %A %B -s %S -x %X -y %Y -p %P";
     };
   };
+
+    programs.delta = {
+      enable = true;
+      options = {
+        navigate = true;
+        line-numbers = true;
+      };
+    };
+
 }
