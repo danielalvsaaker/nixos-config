@@ -5,7 +5,7 @@
     enable = true;
 
     policies = {
-      "BlockAboutAddons" = true;
+      "BlockAboutAddons" = false;
       "BlockAboutProfiles" = true;
       "DisableFirefoxStudies" = true;
       "DisableSetDesktopBackground" = true;
