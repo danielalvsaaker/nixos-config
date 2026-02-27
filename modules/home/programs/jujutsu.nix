@@ -19,6 +19,12 @@
       ui = {
         pager = ":builtin";
         default-command = "log";
+        diff-formatter = [
+          (lib.getExe pkgs.difftastic)
+          "--color=always"
+          "$left"
+          "$right"
+        ];
       };
 
       merge-tools.mergiraf = {
